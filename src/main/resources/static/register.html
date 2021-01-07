@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+<center>
+<form action="register" method="post">
+    学  号：<input type="text" name="username" />  <br>
+    密  码：<input type="password" name="password"><br>
+    姓  名：<input type="text" name="name"><br>
+    性  别：
+    <select id="sex" name="sex">
+        <option value="男">男</option>
+        <option value="女">女</option>
+    </select><br>
+    年  龄：<input type="text" name="age" /><br>
+    电  话：<input type="tel" name="phones" placeholder="电话"/><br>
+    邮  箱：<input type="email" name="email" /><br>
+    身份证：<input type="text" name="card_id" /><br>
+    身  份：
+    <select id="identity" name="identity">
+        <option value="学生">学生</option>
+        <option value="老师">老师</option>
+    </select><br>
+    <input type="reset" value="重置" />
+    <input type="submit" value="提交" />
+</form>
+</center>
+</body>
+</html>

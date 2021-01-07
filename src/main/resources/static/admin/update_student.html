@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改学生信息</title>
+</head>
+<body>
+<h2>请输入你需要修改的信息</h2>
+<form action="updateStudent" method="post">
+    <input type="hidden" name="student_id" th:value="${student.getStudentId()}">
+    姓    名：<input type="text" name="user_name" th:value="${student.getStudentName()}">  <br>
+    班    级：<input type="text" name="classes" th:value="${student.getClasses()}">  <br>
+    主修专业：<input type="text" name="major_name" th:value="${student.getMajorName()}">  <br>
+    所在学院：<input type="text" name="academy_name" th:value="${student.getAcademyName()}">  <br>
+    <input type="submit" value="提交" />
+    <input type="reset" value="重置" />
+</form>
+</body>
+</html>

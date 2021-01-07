@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>我的课程</title>
+    <link href="upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="upload/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script>
+    $(function(){
+        $(".headerpage").load("public/index_head.html");
+        $(".footerpage").load("public/index_foot.html");
+    });
+</script>
+<div class="headerpage"></div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="lefterpage">
+            <ul class="nav nav-pills nav-stacked" style="margin-left: 100px">
+                <li role="presentation" class="active"><a href="/queryMinor"><em class="glyphicon glyphicon-home">查询辅修专业</em></a></li>
+                <li role="presentation" class="active"><a href="/queryMyCourse">我的辅修课程</a></li>
+                <li role="presentation" class="active"><a id="upload-table" href="javascript:openUrl('uploadTable')">交回执单</a></li>
+                <li role="presentation" class="active"><a id="down-table" href="javascript:openUrl('down-table')">下载报名表</a></li>
+                <li role="presentation" class="active"><a id="score" href="javascript:openUrl('score')">成绩</a></li>
+                <li role="presentation" class="active"><a id="board" href="javascript:openUrl('board')">通知</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main" class="panel panel-default col-sm-6">
+        <div id="light">
+            <div th:if="${respData.getCode() != 0}">
+                <em th:text="${respData.getMsg()}"></em>
+            </div>
+            <table th:if="${data != null}" class="table">
+                <tr>
+                    <th>课程名称</th>
+                    <th>上课时间</th>
+                </tr>
+                <tr th:each="course:${data}">
+                    <th th:text="${course.getCourseName()}"></th>
+                    <th th:text="${course.getTimeTable()}"></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="footerpage"></div>
+<script type="text/javascript" src="upload/js/user.js"></script>
+<script type="text/javascript">
+    function openUrl(url) {
+        $('#main').attr(url);
+    }
+</script>
+</body>
+</html>

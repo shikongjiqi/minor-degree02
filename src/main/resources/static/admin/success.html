@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员首页</title>
+    <link href="../upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../upload/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="headerpage">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid" style="margin-left: 100px">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:openUrl('#')" id="0"><em class="glyphicon glyphicon-home">表单管理</em><span class="sr-only">(current)</span></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left: 100px;margin-right: 100px">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:openUrl('queryApplyUser')" id="queryApplyUser">填表人管理</a></li>
+                    <li><a id="queryToAudit" href="javascript:openUrl('queryToAudit')">待审核数据</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:openUrl('queryInformation')" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">统计<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:openUrl('pie')" id="pie"><input value="1" type="hidden" id="1">计算机科学与技术（大数据方向）</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="请输入要查询的课程">
+                    </div>
+                    <button type="submit" class="btn btn-success">搜索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="queryUser" href="javascript:openUrl('queryUser')">用户管理</a></li>
+                    <li><a id="queryTeacher" href="javascript:openUrl('queryTeacher')">教师管理</a></li>
+                    <li><a id="queryStudent" href="javascript:openUrl('queryStudent')">学生管理</a></li>
+                    <li><a href="index.html"><em class="glyphicon glyphicon-log-out">退出</em></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="container panel panel-default col-sm-10" id="main" style="height: 500px;">
+    </div>
+</div>
+<!--自定义的js-->
+<script type="text/javascript" src="../upload/js/user.js"></script>
+<!--引入图形化资源类-->
+<script type="text/javascript" src="../upload/js/echarts.js"></script>
+<script type="text/javascript">
+    function openUrl(url){
+        $('#main').attr(url);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="upload/js/bootstrap.min.js"></script>
+    <script>
+        $(function(){
+            $(".headerpage").load("public/index_head.html");
+        });
+    </script>
+</head>
+<body>
+<!--公共页面头部 head-->
+<div class="headerpage"></div>
+<div class="row container">
+    <div class="col-sm-3">
+        <div class="lefterpage">
+            <ul class="nav nav-pills nav-stacked" style="margin-left: 100px">
+                <li role="presentation" class="active"><a href="queryTeacherMinor">查询辅修专业</a></li>
+                <li role="presentation" class="active"><a id="queryTeacherCourse" href="javascript:openUrl('queryTeacherCourse')">我的课程</a></li>
+                <li role="presentation" class="active"><a id="queryMyStudent" href="javascript:openUrl('queryMyStudent')">班级名册</a></li>
+                <li role="presentation" class="active"><a href="#">成绩录入</a></li>
+                <li role="presentation" class="active"><a href="#">成绩</a></li>
+                <li role="presentation" class="active"><a id="board" href="javascript:openUrl('board')">通知</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-6" id="main">
+        <div th:if="${respData.getCode() != 0}">
+            <em th:text="${respData.getMsg()}"></em>
+        </div>
+        <div id="light">
+            <table th:if="${list != null}" class="table">
+                <tr>
+                    <td>课程编号</td>
+                    <td>辅修专业</td>
+                    <td>开设学院</td>
+                    <td>报名人数</td>
+                    <td>操作</td>
+                </tr>
+                <tr th:each="minor:${list}">
+                    <td th:text="${minor.getMinorId()}"></td>
+                    <td th:text="${minor.getMinorName()}"></td>
+                    <td th:text="${minor.getAcademy()}"></td>
+                    <td th:text="${minor.getCount()}"></td>
+                    <td><button id="query_about_course" class="btn btn-success" th:value="${minor.getMinorId()}">查看相关课程</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!--公共页尾 foot-->
+<div class="footerpage"></div>
+<script type="text/javascript" src="upload/js/user.js"></script>
+<script type="text/javascript">
+    function openUrl(url){
+        $('#main').attr(url);
+    }
+</script>
+</body>
+</html>

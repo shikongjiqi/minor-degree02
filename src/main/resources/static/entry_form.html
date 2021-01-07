@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>报名页面</title>
+    <link href="upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="upload/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btn").click(function () {
+                minorId();
+            });
+
+            function minorId() {
+                var url = document.URL;
+                var urlA = url.split("=");
+                var cid = urlA[1];
+                $("#minorId").attr("value",cid);
+            }
+        });
+    </script>
+</head>
+<body>
+<script>
+    $(function(){
+        $(".headerpage").load("public/index_head.html");
+        $(".footerpage").load("public/index_foot.html");
+    });
+</script>
+<div class="headerpage"></div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="lefterpage">
+            <ul class="nav nav-pills nav-stacked" style="margin-left: 100px">
+                <li role="presentation" class="active"><a href="/queryMinor"><em class="glyphicon glyphicon-home">查询辅修专业</em></a></li>
+                <li role="presentation" class="active"><a href="/queryMyCourse">我的辅修课程</a></li>
+                <li role="presentation" class="active"><a id="upload-table" href="javascript:openUrl('uploadTable')">交回执单</a></li>
+                <li role="presentation" class="active"><a id="down-table" href="javascript:openUrl('down-table')">下载报名表</a></li>
+                <li role="presentation" class="active"><a href="score">成绩</a></li>
+                <li role="presentation" class="active"><a id="board" href="javascript:openUrl('board')">通知</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-6" id="main">
+        <div id="light" class="form-inline container">
+            <form action="/apply" method="post" class="form-inline">
+                <input type="hidden" name="minorId" value="" id="minorId">
+                <div class="form-group">
+                    <label for="exampleInputName">姓名</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="姓名">
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputsex">性别</label>
+                    <select id="exampleInputsex" name="sex">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputUsername">学号</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputUsername" placeholder="学号">
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputMajor_name">专业</label>
+                    <input type="text" name="major_name" class="form-control" id="exampleInputMajor_name" placeholder="专业">
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputMajor_course">主修课程</label>
+                    <select id="exampleInputMajor_course" name="major_course">
+                        <option value="工学">工学</option>
+                        <option value="管理学">管理学</option>
+                        <option value="经济学">经济学</option>
+                        <option value="理学">理学</option>
+                        <option value="农学">农学</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputCard_id">身份证号</label>
+                    <input type="text" name="card_id" class="form-control" id="exampleInputCard_id" placeholder="身份证号">
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputaverage_score">平均成绩</label>
+                    <input type="text" name="average_score" class="form-control" id="exampleInputaverage_score" placeholder="平均成绩">
+                </div><br><br>
+                <div class="form-group">
+                    <label for="exampleInputinterest_course">感兴趣的学科</label>
+                    <input type="text" name="interest_course" class="form-control" id="exampleInputinterest_course" placeholder="感兴趣的学科">
+                </div><br><br th:text="${msg}">
+                <div class="form-group">
+                    <input type="submit" value="提交" id="btn" class="btn btn-info">
+                    <input type="reset" value="重置" class="btn btn-info">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="footerpage"></div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>删除用户信息</title>
+    <script type="text/javascript" src="../upload/js/jquery.min.js"></script>
+</head>
+<body onload="test()">
+<input type="hidden" name="test" id="test" th:value="${userId}" />
+<script type="text/javascript">
+    function test() {
+        var userId = $("#test").val();
+        alert(userId);
+        window.location.href="deleteUser?userId=" + userId;
+    }
+</script>
+</body>
+</html>

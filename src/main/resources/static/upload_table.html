@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+    <link href="upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="upload/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script>
+    $(function(){
+        $(".headerpage").load("public/index_head.html");
+        $(".footerpage").load("public/index_foot.html");
+    });
+</script>
+<div class="headerpage"></div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="lefterpage">
+            <ul class="nav nav-pills nav-stacked" style="margin-left: 100px">
+                <li role="presentation" class="active"><a href="/queryMinor"><em class="glyphicon glyphicon-home">查询辅修专业</em></a></li>
+                <li role="presentation" class="active"><a href="/queryMyCourse">我的辅修课程</a></li>
+                <li role="presentation" class="active"><a id="upload-table" href="javascript:openUrl('uploadTable')">交回执单</a></li>
+                <li role="presentation" class="active"><a id="down-table" href="javascript:openUrl('down-table')">下载报名表</a></li>
+                <li role="presentation" class="active"><a href="score">成绩</a></li>
+                <li role="presentation" class="active"><a id="board" href="javascript:openUrl('board')">通知</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-9" id="main">
+        <div id="light">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>注意：</strong>不上传回执单的同学需要等待老师确认缴费之后，方可查看自己是否报名成功。
+            </div>
+<!--            <form  id="fileform" enctype="multipart/form-data">-->
+                <div class="form-group">
+                    <input type="file" name="fileName" id="file" style="width: 0;height: 0" onchange="loadFile(this.files[0])"><br>
+                    <label class="btn btn-info" for="file">选择图片</label>
+                    <label id="filePos">未选择任何文件</label>
+                </div>
+                <button id="upload" class="btn-info">上传</button>
+<!--            </form>-->
+        </div>
+    </div>
+</div>
+<div class="footerpage"></div>
+<script type="text/javascript" src="upload/js/user.js"></script>
+<script type="text/javascript">
+    function openUrl(url) {
+        $('#main').attr(url);
+    }
+
+    function loadFile(file){
+        $("#filePos").html(file.name);
+    }
+
+    $("#upload").on("click",function () {
+        var file = $("#file").prop("files")[0];
+        var fileName = new FormData();
+        fileName.append("fileName", file);
+        var url = "upload";
+        $.ajax({
+            type:"post",
+            url:url,
+            contentType: false,
+            data:fileName,
+            processData:false,
+            success:function (data) {
+                if (data.code == 0){
+                    alert("上传成功");
+                } else {
+                    alert(data.msg);
+                }
+                location.reload();
+            }
+        });
+    });
+</script>
+</body>
+</html>

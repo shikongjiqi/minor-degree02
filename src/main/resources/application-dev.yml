@@ -1,0 +1,43 @@
+server:
+  port: 8002
+
+spring:
+  #数据库信息
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/minordegree?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    type: com.alibaba.druid.pool.DruidDataSource
+  #开启session-JDBC
+  session:
+    store-type: jdbc
+    timeout: 7200s
+    jdbc:
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
+  thymeleaf:
+    cache: false
+    prefix: classpath:/static/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    mvc:
+      static-path-pattern: /static/**
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/,file:**
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 300MB
+
+#公共配置与profiles选择无关 mapperLocations指的路径是src/main/resources
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+local-file-directory: D:\JavaFiles\git\minor-degree\minor-degree\src\main\resources\static
+file-prefix: http://localhost:8002/static/
+
+#分页设置
+pagehelper:
+  reasonable: true

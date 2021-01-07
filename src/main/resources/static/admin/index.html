@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登录</title>
+    <link href="../upload/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../upload/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../upload/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+         $("#login").on("click",function () {
+             var name1 = $("#username").val();
+             var password = $("#password").val();
+             if(name1 == null || name1 == ""){
+                 alert("用户名不能为空");
+                 return;
+             }else if(password == null || password == ""){
+                 alert("密码不能为空");
+                 return;
+             }else{
+                 $("#myform").submit();
+             }
+         });
+    </script>
+</head>
+<body>
+<div class="row">
+    <div class="container">
+        <form action="/admin/login" method="post" id="myForm">
+            <input placeholder="账号" name="username" id="username" type="text"><br>
+            <input placeholder="密码" name="password" id="password" type="password" th:text="${msg}"><br>
+            <button class="btn btn-info" id="login">立即登录</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
