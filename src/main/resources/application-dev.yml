@@ -5,7 +5,7 @@ spring:
   #数据库信息
   datasource:
     username: root
-    password: root
+    password: password
     url: jdbc:mysql://127.0.0.1:3306/minordegree?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     type: com.alibaba.druid.pool.DruidDataSource
   #开启session-JDBC

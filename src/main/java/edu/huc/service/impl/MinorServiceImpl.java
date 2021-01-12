@@ -1,5 +1,7 @@
 package edu.huc.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Academy;
 import edu.huc.bean.Minor;
 import edu.huc.common.response.RespCode;
@@ -23,22 +25,16 @@ public class MinorServiceImpl implements IMinorService {
 
     @Override
     public RespData queryMinor(int page) {
-//        PageHelper.startPage(page, 3);//分页处理
-//        List<Minor> listMinor = minorMapper.queryMinor();//查询辅修数据
-//        List<ResultMinor> list = convertMinorList(listMinor);//将查询数据转换为我们所需要的字段
-//        PageInfo<ResultMinor> pageInfo = new PageInfo<ResultMinor>(list);
-        return new RespData(RespCode.SUCCESS);
-    }
-
-    //数据转换，将辅修课程转换为所需数据
-    private List<ResultMinor> convertMinorList(List<Minor> minorList){
-        List<ResultMinor> list = new ArrayList<ResultMinor>();
-        for (Minor minor : minorList) {
-            Academy academy = academyMapper.selectById(minor.getAcademyId());//将辅修课程数据转换为前端需要的字段
-            ResultMinor resultMinor = convertMinor(minor.getMinorId(), minor.getName(), academy.getAcademyName(),  minor.getCount());
+        Page minorPage = minorMapper.selectPage(new Page<>(page, 10), null);//查询数据
+        List<Minor> minorList = minorPage.getRecords();
+        List<ResultMinor> list = new ArrayList<>();
+        for(int i = 0;i < minorList.size();i ++){
+            Academy academy = academyMapper.selectById(minorList.get(i).getAcademyId());
+            ResultMinor resultMinor = convertMinor(minorList.get(i).getMinorId(),minorList.get(i).getName(), academy.getAcademyName(), minorList.get(i).getCount());
             list.add(resultMinor);
         }
-        return list;
+        minorPage.setRecords(list);
+        return new RespData(RespCode.SUCCESS,minorPage);
     }
 
     //数据转换封装
