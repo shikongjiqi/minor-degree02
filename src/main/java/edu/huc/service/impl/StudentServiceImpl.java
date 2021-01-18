@@ -1,6 +1,7 @@
 package edu.huc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Student;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
@@ -19,18 +20,9 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public RespData queryStudent(int page) {
-//        Integer studentNum = studentMapper.allStudentNum();
-//        if ((page-1)<0){
-//            page = 1;
-//        }
-//        if(page>=(studentNum/10+1)){
-//            page = studentNum/10+1;
-//        }
-//        int start = (page-1)*10 + 1;
-//        int end = 10;
-//        List<Student> studentList = studentMapper.queryStudent(start,end);
-//        if (studentList.isEmpty())
-//            return new RespData(RespCode.USER_LOCKED);
+        Page selectPage = studentMapper.selectPage(new Page(page, 10), null);
+        if (selectPage.getRecords().isEmpty())
+            return new RespData(RespCode.USER_LOCKED);
         return new RespData(RespCode.SUCCESS);
     }
 

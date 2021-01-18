@@ -2,13 +2,14 @@ package edu.huc.controller;
 
 import edu.huc.common.response.RespData;
 import edu.huc.service.IChartService;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@Controller
+@RestController
 public class ChartController {
     @Resource
     private IChartService chartService;
@@ -18,8 +19,7 @@ public class ChartController {
      * @param minorId
      * @return
      */
-    @RequestMapping(value = "admin/pie",produces = "application/json;charset=utf-8")
-    @ResponseBody
+    @GetMapping(value = "/pie",produces = "application/json;charset=utf-8")
     public RespData pie(int minorId){
         RespData respData = chartService.statics(minorId);
         return respData;
@@ -30,8 +30,7 @@ public class ChartController {
      * @param minorId
      * @return
      */
-    @RequestMapping(value = "admin/histogram",produces = "application/json;charset=utf-8")
-    @ResponseBody
+    @PostMapping(value = "/histogram",produces = "application/json;charset=utf-8")
     public RespData histogram(int minorId, String academyName){
         RespData respData = chartService.histogram(minorId,academyName);
         return respData;

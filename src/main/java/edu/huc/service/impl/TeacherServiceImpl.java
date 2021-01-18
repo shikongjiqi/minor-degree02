@@ -37,22 +37,18 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     /**
-     * 管理员修改老师数据
-     * @param teacherId
-     * @param userName
-     * @param academyName
-     * @param professional
+     * 修改老师数据
+     * @param teacher
      */
     @Override
-    public void adminUpdateTeacherMessage(int teacherId, String userName, String academyName, String professional) {
-        Teacher teacher = new Teacher();
-        teacher.setTeacherId(teacherId);
-        teacher.setUserName(userName);
-        teacher.setAcademyName(academyName);
-        teacher.setProfessional(professional);
+    public void adminUpdateTeacherMessage(Teacher teacher) {
         teacherMapper.updateById(teacher);
     }
 
+    /**
+     * 删除教师信息
+     * @param userId
+     */
     @Override
     public void deleteTeacherMessage(int userId) {
         QueryWrapper queryWrapper = new QueryWrapper();

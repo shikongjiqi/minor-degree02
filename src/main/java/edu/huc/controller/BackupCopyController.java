@@ -1,13 +1,17 @@
 package edu.huc.controller;
 
+import edu.huc.common.response.RespCode;
+import edu.huc.common.response.RespData;
 import edu.huc.service.IBackupCopyService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-@Controller
+@RestController
+@RequestMapping("/")
 public class BackupCopyController {
     @Resource
     private IBackupCopyService backupCopyService;
@@ -15,13 +19,12 @@ public class BackupCopyController {
     /**
      * 管理员删除用户信息之前先将用户信息存在backup_copy表中以作备用
      * @param userId
-     * @param model
      * @return
      */
-    @RequestMapping("admin/insertMessage")
-    public String insertNeedDeleteMessage(int userId, Model model){
+    @GetMapping("admin/insertMessage")
+    public RespData insertNeedDeleteMessage(@RequestParam int userId){
         backupCopyService.insertMessage(userId);
-        model.addAttribute("userId",userId);
-        return "admin/delete_user";
+        return new RespData(RespCode.SUCCESS,userId);
+
     }
 }

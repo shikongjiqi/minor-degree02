@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface IBoardService {
-    RespData queryBoard();
+    RespData queryBoard(int page);
 }

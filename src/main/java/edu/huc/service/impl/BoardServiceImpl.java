@@ -1,5 +1,6 @@
 package edu.huc.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Board;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
@@ -18,11 +19,11 @@ public class BoardServiceImpl implements IBoardService {
 
     //查询通知
     @Override
-    public RespData queryBoard() {
-        List<Board> boardList = boardMapper.queryBoard();
-        if (boardList.isEmpty()){
+    public RespData queryBoard(int page) {
+        Page<Board> boardPage = boardMapper.selectPage(new Page<>(page, 10), null);
+        if (boardPage.getRecords().isEmpty()){
             return new RespData(RespCode.SUCCESS,null);
         }
-        return new RespData(RespCode.SUCCESS,boardList);
+        return new RespData(RespCode.SUCCESS,boardPage);
     }
 }

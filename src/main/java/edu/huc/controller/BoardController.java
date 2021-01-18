@@ -2,12 +2,12 @@ package edu.huc.controller;
 
 import edu.huc.common.response.RespData;
 import edu.huc.service.IBoardService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
+@RequestMapping("/board")
 public class BoardController {
     @Resource
     private IBoardService boardService;
@@ -16,9 +16,9 @@ public class BoardController {
      * 查询公告
      * @return
      */
-    @PostMapping("board")
-    public RespData board(){
-        RespData respData = boardService.queryBoard();
+    @GetMapping("/getBoard")
+    public RespData board(@RequestParam(defaultValue = "1") int page){
+        RespData respData = boardService.queryBoard(page);
         return respData;
     }
 }

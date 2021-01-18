@@ -3,14 +3,13 @@ package edu.huc.controller;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.service.IScoreService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@RequestMapping("/score")
 public class ScoreController {
     @Resource
     private IScoreService scoreService;
@@ -30,7 +29,7 @@ public class ScoreController {
         return respData;
     }
 
-    @RequestMapping("queryScore")
+    @GetMapping("queryScore")
     public RespData queryScore(HttpSession session){
         Integer id  = (Integer) session.getAttribute("userId");
         if(id == null || id == 0){
@@ -40,7 +39,7 @@ public class ScoreController {
         return respData;
     }
 
-    @RequestMapping("queryMyScore")
+    @GetMapping("queryMyScore")
     public RespData queryMyScore(HttpSession session){
         Integer id  = (Integer) session.getAttribute("userId");
         if(id == null || id == 0){

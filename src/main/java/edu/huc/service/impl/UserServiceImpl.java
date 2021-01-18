@@ -1,6 +1,7 @@
 package edu.huc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
@@ -50,30 +51,11 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 将封装好的user对象添加到数据库中
-     * @param username
-     * @param password
-     * @param name
-     * @param sex
-     * @param card_id
-     * @param age
-     * @param phones
-     * @param email
-     * @param identity
-     * @param model
+     * @param user
      * @return
      */
     @Override
-    public RespData register(String username, String password, String name, String sex, String card_id, int age, String phones, String email, String identity, Model model) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setName(name);
-        user.setSex(sex);
-        user.setAge(age);
-        user.setPhones(phones);
-        user.setEmail(email);
-        user.setCardId(card_id);
-        user.setIdentity(identity);
+    public RespData register(User user) {
         int insert = userMapper.insert(user);//向数据库中添加用户信息
         if (insert == 0){
             return new RespData(RespCode.WRONG);
@@ -91,18 +73,8 @@ public class UserServiceImpl implements IUserService {
     //管理员对于用户信息的查询
     @Override
     public RespData adminQueryUser(int page) {
-        ResultPage resultPage = new ResultPage();
-//        Integer userNum = userMapper.allUserNum();
-//        int start = (page-1)*10;
-//        int end = 10;
-//        int pageSize = userNum % end == 0 ? userNum/end : userNum/end +1;
-//        resultPage.setPageSize(pageSize);
-//        List<User> userList = userMapper.adminQueryUser(start,end);
-//        if (userList.isEmpty())
-//            return new RespData(RespCode.USER_LOCKED);
-//        resultPage.setPage(page);
-//        resultPage.setData(userList);
-        return new RespData(RespCode.SUCCESS,resultPage);
+        Page<User> userPage = userMapper.selectPage(new Page<>(page, 10), null);
+        return new RespData(RespCode.SUCCESS,userPage);
     }
 
     //    管理员修改用户信息

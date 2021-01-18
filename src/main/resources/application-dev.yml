@@ -14,6 +14,9 @@ spring:
     timeout: 7200s
     jdbc:
       schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
+#  devtools:
+#    livereload:
+#      enabled: true
   thymeleaf:
     cache: false
     prefix: classpath:/static/

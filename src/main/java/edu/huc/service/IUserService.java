@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 public interface IUserService {
     RespData login(String username, String password);
 
-    RespData register(String username, String password, String name, String sex, String card_id, int age, String phones, String email, String identity, Model model);
+    RespData register(User user);
 
     RespData delUser(int userId);
 
