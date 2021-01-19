@@ -5,9 +5,11 @@ import java.util.List;
 public class ResultPage {
     private List data;
 
-    private int pageSize;//总页数
+    private long pageSize;//总页数
 
-    private int page;//当前页
+    private long page;//当前页
+
+    private long count;
 
     public List getData() {
         return data;
@@ -17,19 +19,27 @@ public class ResultPage {
         this.data = data;
     }
 
-    public int getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(long pageSize) {
         this.pageSize = pageSize;
     }
 
-    public int getPage() {
+    public long getPage() {
         return page;
     }
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
     }
 }

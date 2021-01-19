@@ -32,16 +32,14 @@ public class ChartServiceImpl implements IChartService {
     public RespData statics(int minorId) {
         List<Academy> academyList = academyMapper.selectList(null);
         List<ResultPieData> list = new ArrayList<>();
-        QueryWrapper queryWrapper = new QueryWrapper<>();
         for (int i = 0;i < academyList.size();i++){
             ResultPieData resultPieData = new ResultPieData();
-            queryWrapper.eq("majorName",academyList.get(i).getAcademyId());
+            QueryWrapper queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("academy_id",academyList.get(i).getAcademyId());
             List<Major> majors = majorMapper.selectList(queryWrapper);
             int integer = 0;
             for (int j = 0;j < majors.size();j ++){
-                queryWrapper.clear();
-                queryWrapper.eq("majorName".equals(majors.get(j).getMajorName()),majors.get(j).getMajorName(),minorId);
-                integer += entryFormMapper.selectCount(queryWrapper);
+                integer += entryFormMapper.selectCountEntryForm(majors.get(j).getMajorName());
             }
             resultPieData.setName(academyList.get(i).getAcademyName());
             resultPieData.setValue(integer);
@@ -55,18 +53,18 @@ public class ChartServiceImpl implements IChartService {
     public RespData histogram(int minorId, String academyName) {
         ResultHistogramData resultHistogramData = new ResultHistogramData();
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("academyName",academyName);
+        queryWrapper.eq("academy_name",academyName);
         Academy academy = academyMapper.selectOne(queryWrapper);
         queryWrapper.clear();
-        queryWrapper.eq("academyId",academy.getAcademyId());
+        queryWrapper.eq("academy_id",academy.getAcademyId());
         List<Major> majorList = majorMapper.selectList(queryWrapper);
         String[] x = new String[majorList.size()];
         int[] y = new int[majorList.size()];
         for (int i = 0;i < majorList.size();i ++){
             x[i] = majorList.get(i).getMajorName();
             queryWrapper.clear();
-            queryWrapper.eq("majorName",majorList.get(i).getMajorName());
-            queryWrapper.eq("minorId",minorId);
+            queryWrapper.eq("major_name",majorList.get(i).getMajorName());
+            queryWrapper.eq("minor_id",minorId);
             Integer integer = entryFormMapper.selectCount(queryWrapper);
             y[i] = integer;
         }

@@ -1,6 +1,7 @@
 package edu.huc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.EntryForm;
 import edu.huc.bean.Major;
 import edu.huc.bean.Minor;
@@ -9,6 +10,7 @@ import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.result.ResultApplyUser;
 import edu.huc.common.result.ResultEntryForm;
+import edu.huc.common.result.ResultPage;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.MajorMapper;
 import edu.huc.dao.MinorMapper;
@@ -92,10 +94,15 @@ public class EntryFormServiceImpl implements IEntryFormService {
 
     //对于报名人员的查询
     @Override
-    public RespData queryApplyUser() {
-        List<EntryForm> entryFormList = entryFormMapper.selectList(null);
-        List<ResultApplyUser> userList = convertResultApplyUserList(entryFormList);
-        return new RespData(RespCode.SUCCESS,userList);
+    public RespData queryApplyUser(int page) {
+        Page<EntryForm> entryFormPage = entryFormMapper.selectPage(new Page<>(page, 10), null);
+        List<ResultApplyUser> userList = convertResultApplyUserList(entryFormPage.getRecords());
+        ResultPage resultPage = new ResultPage();
+        resultPage.setData(userList);
+        resultPage.setPage(page);
+        resultPage.setPageSize(entryFormPage.getSize());
+        resultPage.setCount(entryFormPage.getTotal());
+        return new RespData(RespCode.SUCCESS,resultPage);
     }
 
     //通过全部审核
@@ -113,7 +120,7 @@ public class EntryFormServiceImpl implements IEntryFormService {
             ResultEntryForm resultEntryForm = new ResultEntryForm();
             resultEntryForm.setEntryFormId(entryForm.getEntryFormId());
             resultEntryForm.setMajorName(entryForm.getMajorName());
-            queryWrapper.eq("userName",entryForm.getUserName());
+            queryWrapper.eq("username",entryForm.getUserName());
             User user = userMapper.selectOne(queryWrapper);
             resultEntryForm.setUserName(user.getName());
             Minor minor = minorMapper.selectById(entryForm.getMinorId());
@@ -128,7 +135,7 @@ public class EntryFormServiceImpl implements IEntryFormService {
         QueryWrapper queryWrapper = new QueryWrapper();
         for (EntryForm entryForm : list) {
             ResultApplyUser resultApplyUser = new ResultApplyUser();
-            queryWrapper.eq("userName",entryForm.getUserName());
+            queryWrapper.eq("username",entryForm.getUserName());
             User user = userMapper.selectOne(queryWrapper);
             resultApplyUser.setName(user.getName());
             resultApplyUser.setMajorName(entryForm.getMajorName());
@@ -136,8 +143,9 @@ public class EntryFormServiceImpl implements IEntryFormService {
             resultApplyUser.setChecked(entryForm.getChecked());
             resultApplyUser.setAverageScore(entryForm.getAverageScore());
             queryWrapper.clear();
-            queryWrapper.eq("majorName",entryForm.getMajorName());
+            queryWrapper.eq("major_name",entryForm.getMajorName());
             Major major = majorMapper.selectOne(queryWrapper);
+            queryWrapper.clear();
             resultApplyUser.setMajorCourse(major.getMajorCourse());
             resultApplyUser.setCardId(entryForm.getCardId());
             Minor minor = minorMapper.selectById(entryForm.getMinorId());

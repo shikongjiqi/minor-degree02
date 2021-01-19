@@ -3,8 +3,6 @@ package edu.huc.controller;
 import edu.huc.bean.EntryForm;
 import edu.huc.common.response.RespData;
 import edu.huc.service.IEntryFormService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +16,7 @@ public class EntryFormController {
 
     /**
      * 学生报名
+     *
      * @param minorId
      * @param name
      * @param major_name
@@ -26,12 +25,11 @@ public class EntryFormController {
      * @param average_score
      * @param interest_course
      * @param session
-     * @param model
      * @return
      */
     @PostMapping("/apply")
     public RespData entryForm(Integer minorId,String name, String major_name, String card_id,String username,
-                            Float average_score, String interest_course,HttpSession session,Model model) {
+                            Float average_score, String interest_course,HttpSession session) {//未测试
         EntryForm entryForm = new EntryForm();
         entryForm.setUserName(username);
         //将数据封装为对象，利用对象进行操作
@@ -47,12 +45,11 @@ public class EntryFormController {
 
     /**
      * 检验用户是否在登录状态下进行操作
-     * @param minorId
      * @param session
      * @return
      */
     @GetMapping("/entryFrom")
-    public RespData apply(int minorId, HttpSession session){
+    public RespData apply(HttpSession session){
         Integer id = (Integer)session.getAttribute("userId");
         RespData respData = entryFormService.check(id);
         return respData;
@@ -76,14 +73,14 @@ public class EntryFormController {
     }
 
     //查询所有报名申请的学生数据
-    @GetMapping("admin/queryApplyUser")
-    public RespData queryApplyUser(){
-        RespData respData = entryFormService.queryApplyUser();
+    @GetMapping("/queryApplyUser")
+    public RespData queryApplyUser(@RequestParam(defaultValue = "1")int page){
+        RespData respData = entryFormService.queryApplyUser(page);
         return respData;
     }
 
     //一键全部审核
-    @GetMapping("admin/allApply")
+    @GetMapping("/allApply")
     public RespData allApply(){
         RespData respData = entryFormService.allApply();
         return respData;

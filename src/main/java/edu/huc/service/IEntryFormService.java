@@ -14,7 +14,7 @@ public interface IEntryFormService {
 
     RespData checkApply(int entryFormId);
 
-    RespData queryApplyUser();
+    RespData queryApplyUser(int page);
 
     RespData allApply();
 }

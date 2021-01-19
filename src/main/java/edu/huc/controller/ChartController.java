@@ -4,7 +4,7 @@ import edu.huc.common.response.RespData;
 import edu.huc.service.IChartService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -31,7 +31,7 @@ public class ChartController {
      * @return
      */
     @PostMapping(value = "/histogram",produces = "application/json;charset=utf-8")
-    public RespData histogram(int minorId, String academyName){
+    public RespData histogram(@RequestParam Integer minorId,@RequestParam String academyName){
         RespData respData = chartService.histogram(minorId,academyName);
         return respData;
     }

@@ -1,6 +1,7 @@
 package edu.huc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Teacher;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
@@ -19,9 +20,9 @@ public class TeacherServiceImpl implements ITeacherService {
 
     //管理员查询教师资料
     @Override
-    public RespData queryTeacher() {
-        List<Teacher> teacherList = teacherMapper.selectList(null);
-        return new RespData(RespCode.SUCCESS,teacherList);
+    public RespData queryTeacher(int page) {
+        Page<Teacher> teacherPage = teacherMapper.selectPage(new Page<>(page, 10), null);
+        return new RespData(RespCode.SUCCESS,teacherPage);
     }
 
     /**

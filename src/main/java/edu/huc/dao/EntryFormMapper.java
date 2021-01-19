@@ -11,4 +11,7 @@ public interface EntryFormMapper extends BaseMapper<EntryForm> {
     void updatCheck(int entryFormId);
 
     void updateEntryFormReserved1(String newFileName ,String userName);
+
+    @Select("select count(*) from tb_entry_form e, tb_major m where e.major_name = m.major_name and e.major_name = #{majorName}")
+    Integer selectCountEntryForm(String majorName);
 }

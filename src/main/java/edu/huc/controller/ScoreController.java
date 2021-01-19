@@ -19,7 +19,7 @@ public class ScoreController {
      * @param session
      * @return
      */
-    @PostMapping("queryMyStudent")
+    @PostMapping("/queryMyStudent")
     public RespData queryMyStudent(HttpSession session){
         Integer id = (Integer) session.getAttribute("userId");
         if (id == null || id == 0){
@@ -29,7 +29,7 @@ public class ScoreController {
         return respData;
     }
 
-    @GetMapping("queryScore")
+    @GetMapping("/queryScore")
     public RespData queryScore(HttpSession session){
         Integer id  = (Integer) session.getAttribute("userId");
         if(id == null || id == 0){

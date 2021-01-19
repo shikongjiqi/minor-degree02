@@ -3,10 +3,7 @@ package edu.huc.controller;
 import edu.huc.bean.Teacher;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultTeacher;
 import edu.huc.service.ITeacherService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,8 +16,8 @@ public class TeacherController {
 
     //以json数据格式返回
     @GetMapping("/queryTeacher")
-    public RespData queryTeacher(){
-        RespData respData = teacherService.queryTeacher();
+    public RespData queryTeacher(@RequestParam(defaultValue = "1")int page){
+        RespData respData = teacherService.queryTeacher(page);
         return respData;
     }
 

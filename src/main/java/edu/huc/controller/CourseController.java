@@ -1,6 +1,5 @@
 package edu.huc.controller;
 
-import edu.huc.bean.Course;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.service.ICourseService;

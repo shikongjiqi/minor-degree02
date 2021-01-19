@@ -3,10 +3,7 @@ package edu.huc.controller;
 import edu.huc.bean.Student;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultStudent;
 import edu.huc.service.IStudentService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,13 +1,10 @@
 package edu.huc.controller;
 
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultMinor;
 import edu.huc.service.IMinorService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/minor")
@@ -20,13 +17,13 @@ public class MinorController {
      * @return
      */
     @GetMapping("/queryMinor")
-    public RespData queryMinor(@RequestParam(value = "page",defaultValue = "1") int page, Model model, HttpSession session){
+    public RespData queryMinor(@RequestParam(value = "page",defaultValue = "1") int page){
         RespData respData = minorService.queryMinor(page);//传递页码值，同时查询辅修课程
         return respData;
     }
 
     @PostMapping("/queryTeacherMinor")
-    public RespData queryTeacherMinor(@RequestParam(value = "page",defaultValue = "1") int page, Model model, HttpSession session){
+    public RespData queryTeacherMinor(@RequestParam(value = "page",defaultValue = "1") int page){
         RespData respData = minorService.queryMinor(page);//传递页码值，同时查询辅修课程
         return respData;
     }

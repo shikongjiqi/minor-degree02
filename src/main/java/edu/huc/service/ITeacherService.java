@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ITeacherService {
-    RespData queryTeacher();
+    RespData queryTeacher(int page);
 
     RespData selectTeacherById(int teacherId);
 
