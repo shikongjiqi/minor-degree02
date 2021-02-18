@@ -19,7 +19,7 @@ public class User {
 
     private String sex;
 
-    private int age;
+    private Integer age;
 
     private String phones;
 

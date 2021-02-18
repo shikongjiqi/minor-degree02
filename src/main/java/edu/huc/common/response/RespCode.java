@@ -1,7 +1,7 @@
 package edu.huc.common.response;
 
 public enum RespCode {
-    SUCCESS(0, "请求成功"),
+    SUCCESS(200, "请求成功"),
     WRONG(1, "服务器内部错误"),
     ENPTY(3,"未报名"),
     ERROR_INPUT(4,"输入内容有误"),

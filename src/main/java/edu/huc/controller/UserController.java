@@ -18,13 +18,12 @@ public class UserController {
 
     /**
      * 登录
-     * @param username
-     * @param password
+     * @param user
      * @return
      */
     @PostMapping("/login")
-    public RespData login(String username, String password){
-        RespData respData = userService.login(username, password);//根据账号、密码登录
+    public RespData login(@RequestBody User user){
+        RespData respData = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
         return respData;
     }
 

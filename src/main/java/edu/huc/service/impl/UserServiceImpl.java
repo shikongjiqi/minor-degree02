@@ -29,9 +29,8 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public RespData login(String username, String password) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("username",username);
-        queryWrapper.eq("password",password);
+        QueryWrapper<User> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("username",username).eq("password",password);
         User user = userMapper.selectOne(queryWrapper);//根据用户名、密码 查询
         if (user == null){
             return new RespData(RespCode.ERROR_USER);
