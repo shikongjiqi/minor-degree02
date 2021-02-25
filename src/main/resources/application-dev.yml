@@ -39,8 +39,4 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 local-file-directory: D:\JavaFiles\git\minor-degree\minor-degree\src\main\resources\static
-file-prefix: http://localhost:8002/static/
-
-#分页设置
-pagehelper:
-  reasonable: true
+file-prefix: http://localhost:8001/static/

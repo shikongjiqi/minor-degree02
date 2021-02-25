@@ -17,6 +17,5 @@ public class SysLoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         return true;
-
     }
 }

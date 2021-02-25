@@ -61,18 +61,6 @@ public class UserController {
     }
 
     /**
-     * 管理员登录
-     * @param username
-     * @param password
-     * @return
-     */
-    @GetMapping("/login")
-    public RespData loginAdmin(String username,String password){
-        RespData respData = userService.login(username, password);
-        return respData;
-    }
-
-    /**
      * 退出管理员
      * @return
      */

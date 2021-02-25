@@ -1,5 +1,7 @@
 package edu.huc.common.result;
 
+import edu.huc.common.constant.UserRole;
+
 /**
  * 登录--对用户信息数据的返回信息进行封装
  */
@@ -10,24 +12,16 @@ public class ResultUser {
 
     private String name;
 
+    private Integer role;
+
+    private String identity;
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    private String identity;
-
-    private int role;
-
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
     }
 
     public int getUserId() {
@@ -50,7 +44,20 @@ public class ResultUser {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Integer role) {
         this.role = role;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public ResultUser(UserRole userRole){
+        this.role = userRole.getCode();
+        this.identity = userRole.getName();
     }
 }

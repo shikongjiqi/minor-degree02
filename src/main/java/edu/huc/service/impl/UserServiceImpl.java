@@ -3,6 +3,7 @@ package edu.huc.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.User;
+import edu.huc.common.constant.UserRole;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.result.ResultAdminUser;
@@ -41,10 +42,19 @@ public class UserServiceImpl implements IUserService {
 
     //将查询出的user信息转为前端所需的字段
     private ResultUser convertUser(User user){
-        ResultUser result = new ResultUser();
+        ResultUser result = null;
+        if ("学生".equals(user.getIdentity())){
+            result = new ResultUser(UserRole.STUDENT);
+        }
+        if ("老师".equals(user.getIdentity())){
+            result = new ResultUser(UserRole.TEACHER);
+        }
+        if ("admin".equals(user.getIdentity())){
+            result = new ResultUser(UserRole.ADMIN);
+        }
         result.setUserId(user.getUserId());
         result.setUserName(user.getName());
-        result.setIdentity(user.getIdentity());
+        result.setName(user.getName());
         return result;
     }
 
