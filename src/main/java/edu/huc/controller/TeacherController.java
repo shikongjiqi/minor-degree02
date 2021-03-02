@@ -4,11 +4,13 @@ import edu.huc.bean.Teacher;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.service.ITeacherService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
+@RequiresAuthentication
 @RequestMapping("/teacher")
 public class TeacherController {
     @Resource

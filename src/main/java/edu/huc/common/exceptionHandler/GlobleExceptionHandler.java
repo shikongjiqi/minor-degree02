@@ -4,22 +4,22 @@ import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-@ControllerAdvice
-@ResponseBody
+@RestControllerAdvice
 public class GlobleExceptionHandler {
-    //异常处理(@ControllerAdvice注解注释的controller层和此注解注释的方法,会对所有controller层抛出的异常进行统一处理)
+    //异常处理(@RestControllerAdvice注解注释的controller层和此注解注释的方法,会对所有controller层抛出的异常进行统一处理，并且转换为json的数据格式)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = Exception.class)
     public RespData ExceptionHandler(HttpServletRequest request, Exception e) {
-        System.out.println("异常处理");
         if (e instanceof ConstraintViolationException){
             ConstraintViolationException ex = (ConstraintViolationException)e;
             return new RespData(RespCode.ERROR_INPUT,ex.getMessage());

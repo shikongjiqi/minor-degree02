@@ -3,12 +3,14 @@ package edu.huc.controller;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.service.ICourseService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@RequiresAuthentication
 @RequestMapping("/course")
 public class CourseController {
     @Resource

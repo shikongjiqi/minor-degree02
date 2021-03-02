@@ -8,7 +8,7 @@ import edu.huc.common.constant.UserRole;
 public class ResultUser {
     private int userId;
 
-    private String userName;
+    private String username;
 
     private String name;
 
@@ -33,11 +33,11 @@ public class ResultUser {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public int getRole() {

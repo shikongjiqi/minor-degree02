@@ -3,12 +3,14 @@ package edu.huc.controller;
 import edu.huc.bean.EntryForm;
 import edu.huc.common.response.RespData;
 import edu.huc.service.IEntryFormService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@RequiresAuthentication
 @RequestMapping("/entryForm")
 public class EntryFormController {
     @Resource

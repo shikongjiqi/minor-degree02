@@ -7,15 +7,12 @@ import edu.huc.common.constant.UserRole;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.result.ResultAdminUser;
-import edu.huc.common.result.ResultPage;
 import edu.huc.common.result.ResultUser;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.IUserService;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -29,19 +26,19 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public RespData login(String username, String password) {
+    public ResultUser login(String username, String password) {
         QueryWrapper<User> queryWrapper = new QueryWrapper();
         queryWrapper.eq("username",username).eq("password",password);
         User user = userMapper.selectOne(queryWrapper);//根据用户名、密码 查询
         if (user == null){
-            return new RespData(RespCode.ERROR_USER);
+            return null;
         }
         ResultUser result = convertUser(user);
-        return new RespData(RespCode.SUCCESS,result);
+        return result;
     }
 
     //将查询出的user信息转为前端所需的字段
-    private ResultUser convertUser(User user){
+    public ResultUser convertUser(User user){
         ResultUser result = null;
         if ("学生".equals(user.getIdentity())){
             result = new ResultUser(UserRole.STUDENT);
@@ -101,6 +98,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void deleteUserMessage(int userId) {
         userMapper.deleteById(userId);
+    }
+
+    @Override
+    public User getById(int userId) {
+        User user = userMapper.selectById(userId);
+        return user;
     }
 
     //  数据封装

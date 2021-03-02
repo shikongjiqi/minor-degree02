@@ -40,3 +40,16 @@ mybatis:
 
 local-file-directory: D:\JavaFiles\git\minor-degree\minor-degree\src\main\resources\static
 file-prefix: http://localhost:8001/static/
+
+config:
+  jwt:
+    #加密秘钥
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    #token七天有效，单位秒
+    expire: 604800
+    header: Authorization
+
+shiro-redis:
+  enable: true
+  redis-manager:
+    host: 127.0.0.1:6379

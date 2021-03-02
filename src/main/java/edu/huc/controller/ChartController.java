@@ -2,6 +2,7 @@ package edu.huc.controller;
 
 import edu.huc.common.response.RespData;
 import edu.huc.service.IChartService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
+@RequiresAuthentication
 public class ChartController {
     @Resource
     private IChartService chartService;

@@ -2,11 +2,13 @@ package edu.huc.controller;
 
 import edu.huc.common.response.RespData;
 import edu.huc.service.IMinorService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
+@RequiresAuthentication
 @RequestMapping("/minor")
 public class MinorController {
     @Resource

@@ -1,7 +1,7 @@
 package edu.huc.common.response;
 
 public class RespData {
-    private int code;//对于异常信息监控处理，0为正常
+    private int code;//对于异常信息监控处理，200为正常
 
     private String msg;//存储异常信息
 
@@ -14,6 +14,10 @@ public class RespData {
     public RespData(RespCode respCode) {
         this.code = respCode.getCode();
         this.msg = respCode.getMsg();
+    }
+
+    public RespData(String msg) {
+        this.msg = msg;
     }
 
     public RespData(RespCode respCode, Object data) {

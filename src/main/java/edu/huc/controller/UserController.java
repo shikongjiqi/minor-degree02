@@ -3,11 +3,16 @@ package edu.huc.controller;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
+import edu.huc.common.result.ResultUser;
 import edu.huc.service.IUserService;
+import edu.huc.util.JwtUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -16,35 +21,13 @@ public class UserController {
     @Resource
     private IUserService userService;
 
-    /**
-     * 登录
-     * @param user
-     * @return
-     */
-    @PostMapping("/login")
-    public RespData login(@RequestBody User user){
-        RespData respData = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
-        return respData;
-    }
-
-    /**
-     * 注册,将数据封装为我们所需要的user对象
-     * @param user
-     * @return
-     */
-    @RequestMapping("/register")
-    public RespData register1(@RequestBody User user){
-        RespData respData = userService.register(user);//向数据库中添加用户数据
-        return respData;
-    }
-
     //退出账号
+    //该注解用来校验用户是否登录
+    @RequiresAuthentication
     @GetMapping("/editUser")
     public RespData editUser(HttpSession session){
         //移除session中的数据
-        session.removeAttribute("userId");
-        session.removeAttribute("username");
-        session.removeAttribute("role");
+        SecurityUtils.getSubject().logout();
         //返回登录页
         return new RespData(RespCode.SUCCESS);
     }
@@ -58,18 +41,6 @@ public class UserController {
         int id = (Integer)session.getAttribute("userId");
         RespData respData = userService.delUser(id);
         return respData;
-    }
-
-    /**
-     * 退出管理员
-     * @return
-     */
-    @GetMapping("/editAdmin")
-    public RespData editAdmin(HttpSession session){
-        session.removeAttribute("userId");
-        session.removeAttribute("username");
-        session.removeAttribute("role");
-        return new RespData(RespCode.SUCCESS);
     }
 
     /**

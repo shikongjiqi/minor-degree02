@@ -5,6 +5,7 @@ import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.result.FileResult;
 import edu.huc.service.IFileUploadService;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
+@RequiresAuthentication
 public class FileController {
     @Resource
     private IFileUploadService fileUploadService;
