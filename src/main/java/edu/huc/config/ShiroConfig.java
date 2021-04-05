@@ -1,9 +1,9 @@
-package edu.huc.common.config;
+package edu.huc.config;
 
 import edu.huc.common.shiro.AccountRealm;
 import edu.huc.common.shiro.JwtFilter;
-import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
@@ -14,8 +14,6 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
@@ -24,7 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
+public class ShiroConfig {
     @Resource
     private JwtFilter jwtFilter;
 
@@ -68,15 +66,5 @@ public class CorsConfig implements WebMvcConfigurer {
 
         shiroFilter.setFilterChainDefinitionMap(filterMap);
         return shiroFilter;
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET","POST","HEAD","PUT","DELETE","OPTIONS")
-                .allowCredentials(true)
-                .maxAge(3600)
-                .allowedHeaders("*");
     }
 }

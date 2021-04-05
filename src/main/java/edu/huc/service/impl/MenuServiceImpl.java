@@ -14,6 +14,11 @@ public class MenuServiceImpl implements IMenuService {
     @Resource
     private MenuMapper menuMapper;
 
+    /**
+     * 获取用户菜单
+     * @param role
+     * @return
+     */
     @Override
     public List<Menu> getMenuList(int role) {
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();

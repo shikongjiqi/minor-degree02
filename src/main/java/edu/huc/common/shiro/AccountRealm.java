@@ -1,26 +1,25 @@
 package edu.huc.common.shiro;
 
-import edu.huc.bean.User;
-import edu.huc.common.constant.UserRole;
-import edu.huc.common.response.RespCode;
-import edu.huc.common.result.ResultUser;
-import edu.huc.service.IUserService;
-import edu.huc.util.JwtUtils;
+import com.huc.demo.common.vo.UserVo;
+import com.huc.demo.entity.User;
+import com.huc.demo.service.UserService;
+import com.huc.demo.util.JwtUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 @Component
 public class AccountRealm extends AuthorizingRealm {
-    @Resource
-    private JwtUtils jwtUtils;
 
     @Resource
-    private IUserService userService;
+    JwtUtils jwtUtils;
+    @Resource
+    UserService userService;
 
     @Override
     public boolean supports(AuthenticationToken token){
@@ -35,13 +34,15 @@ public class AccountRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         JwtToken jwtToken = (JwtToken) token;
-        String userId = jwtUtils.getClaimByToken((String)jwtToken.getPrincipal()).getSubject();
-        User user = userService.getById(Integer.valueOf(userId));
-        if (user == null){
-            throw new UnknownAccountException("用户不存在");
-        }
-        ResultUser resultUser = userService.convertUser(user);
 
-        return new SimpleAuthenticationInfo(resultUser,jwtToken.getCredentials(),getName());
+        String userId = jwtUtils.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
+        User user = userService.getById(Integer.valueOf(userId));
+        if(user == null){
+            throw new UnknownAccountException("账号不存在");
+        }
+        System.out.println("---------------------");
+        UserVo profile = new UserVo();
+        BeanUtils.copyProperties(user,profile);
+        return new SimpleAuthenticationInfo(profile,jwtToken.getCredentials(),getName());
     }
 }

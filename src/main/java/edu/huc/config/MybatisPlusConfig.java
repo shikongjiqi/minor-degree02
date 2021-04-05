@@ -1,4 +1,4 @@
-package edu.huc.common.config;
+package edu.huc.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
