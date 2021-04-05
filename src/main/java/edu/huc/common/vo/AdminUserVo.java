@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultAdminUser {
+public class AdminUserVo {
     private int userId;
 
     private String username;

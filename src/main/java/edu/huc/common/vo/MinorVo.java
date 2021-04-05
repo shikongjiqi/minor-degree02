@@ -1,9 +1,9 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
 /**
  * 对辅修专业信息的数据结果进行封装
  */
-public class ResultMinor {
+public class MinorVo {
     private int minorId;
 
     private String minorName;

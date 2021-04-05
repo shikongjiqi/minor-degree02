@@ -1,4 +1,4 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
 import edu.huc.common.constant.UserRole;
 

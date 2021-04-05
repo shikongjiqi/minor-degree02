@@ -3,7 +3,7 @@ package edu.huc.controller;
 import edu.huc.bean.EntryForm;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.FileResult;
+import edu.huc.common.vo.FileVo;
 import edu.huc.service.IFileUploadService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +47,7 @@ public class FileController {
             return respData;
         }
         EntryForm data = (EntryForm) respData.getData();
-        FileResult fileResult = fileUploadService.uploadFile(file,data.getUserName());
+        FileVo fileResult = fileUploadService.uploadFile(file,data.getUserName());
         return new RespData(RespCode.SUCCESS,fileResult);
     }
 

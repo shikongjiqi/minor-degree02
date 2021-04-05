@@ -1,9 +1,9 @@
 package edu.huc.common.shiro;
 
-import com.huc.demo.common.vo.UserVo;
-import com.huc.demo.entity.User;
-import com.huc.demo.service.UserService;
-import com.huc.demo.util.JwtUtils;
+import edu.huc.bean.User;
+import edu.huc.common.vo.UserVo;
+import edu.huc.service.IUserService;
+import edu.huc.util.JwtUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -19,7 +19,7 @@ public class AccountRealm extends AuthorizingRealm {
     @Resource
     JwtUtils jwtUtils;
     @Resource
-    UserService userService;
+    private IUserService userService;
 
     @Override
     public boolean supports(AuthenticationToken token){

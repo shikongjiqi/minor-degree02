@@ -1,8 +1,8 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
 import java.io.Serializable;
 
-public class FileResult implements Serializable {
+public class FileVo implements Serializable {
     private static final long serialVersionUID = -4118483515928349479L;
     // 文件名
     private String fileName;
@@ -17,17 +17,17 @@ public class FileResult implements Serializable {
     private Boolean success = false;
     private String msg;
 
-    public FileResult() {
+    public FileVo() {
         super();
     }
 
-    public FileResult(Boolean success, String msg) {
+    public FileVo(Boolean success, String msg) {
         super();
         this.success = success;
         this.msg = msg;
     }
 
-    public FileResult(String fileName, String extName, Long fileSize, String serverPath) {
+    public FileVo(String fileName, String extName, Long fileSize, String serverPath) {
         super();
         this.fileName = fileName;
         this.extName = extName;

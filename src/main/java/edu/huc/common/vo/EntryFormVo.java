@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultEntryForm {
+public class EntryFormVo {
     private int entryFormId;
 
     private String userName;

@@ -8,9 +8,9 @@ import edu.huc.bean.Minor;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultApplyUser;
-import edu.huc.common.result.ResultEntryForm;
-import edu.huc.common.result.ResultPage;
+import edu.huc.common.vo.ApplyUserVo;
+import edu.huc.common.vo.EntryFormVo;
+import edu.huc.common.vo.PageVo;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.MajorMapper;
 import edu.huc.dao.MinorMapper;
@@ -76,7 +76,7 @@ public class EntryFormServiceImpl implements IEntryFormService {
         if (entryFormList.isEmpty()){
             return new RespData(RespCode.SUCCESS);
         }
-        List<ResultEntryForm> list = convertUserList(entryFormList);
+        List<EntryFormVo> list = convertUserList(entryFormList);
         return new RespData(RespCode.SUCCESS,list);
     }
 
@@ -96,8 +96,8 @@ public class EntryFormServiceImpl implements IEntryFormService {
     @Override
     public RespData queryApplyUser(int page) {
         Page<EntryForm> entryFormPage = entryFormMapper.selectPage(new Page<>(page, 10), null);
-        List<ResultApplyUser> userList = convertResultApplyUserList(entryFormPage.getRecords());
-        ResultPage resultPage = new ResultPage();
+        List<ApplyUserVo> userList = convertResultApplyUserList(entryFormPage.getRecords());
+        PageVo resultPage = new PageVo();
         resultPage.setData(userList);
         resultPage.setPage(page);
         resultPage.setPageSize(entryFormPage.getSize());
@@ -113,11 +113,11 @@ public class EntryFormServiceImpl implements IEntryFormService {
     }
 
     //将待审核数据转换为我们所需要的，便于页面话处理的对象
-    private List<ResultEntryForm> convertUserList(List<EntryForm> list){
-        List<ResultEntryForm> entryFormList = new ArrayList<>();
+    private List<EntryFormVo> convertUserList(List<EntryForm> list){
+        List<EntryFormVo> entryFormList = new ArrayList<>();
         QueryWrapper queryWrapper = new QueryWrapper();
         for (EntryForm entryForm : list) {
-            ResultEntryForm resultEntryForm = new ResultEntryForm();
+            EntryFormVo resultEntryForm = new EntryFormVo();
             resultEntryForm.setEntryFormId(entryForm.getEntryFormId());
             resultEntryForm.setMajorName(entryForm.getMajorName());
             queryWrapper.eq("username",entryForm.getUserName());
@@ -130,11 +130,11 @@ public class EntryFormServiceImpl implements IEntryFormService {
         return entryFormList;
     }
 
-    private List<ResultApplyUser> convertResultApplyUserList(List<EntryForm> list){
-        List<ResultApplyUser> userList = new ArrayList<>();
+    private List<ApplyUserVo> convertResultApplyUserList(List<EntryForm> list){
+        List<ApplyUserVo> userList = new ArrayList<>();
         QueryWrapper queryWrapper = new QueryWrapper();
         for (EntryForm entryForm : list) {
-            ResultApplyUser resultApplyUser = new ResultApplyUser();
+            ApplyUserVo resultApplyUser = new ApplyUserVo();
             queryWrapper.eq("username",entryForm.getUserName());
             User user = userMapper.selectOne(queryWrapper);
             resultApplyUser.setName(user.getName());

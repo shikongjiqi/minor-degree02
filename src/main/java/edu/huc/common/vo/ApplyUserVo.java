@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultApplyUser {
+public class ApplyUserVo {
     private String name;
 
     private String majorName;

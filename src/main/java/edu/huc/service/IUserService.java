@@ -2,9 +2,8 @@ package edu.huc.service;
 
 import edu.huc.bean.User;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultUser;
+import edu.huc.common.vo.ResultUser;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 @Service
 public interface IUserService {

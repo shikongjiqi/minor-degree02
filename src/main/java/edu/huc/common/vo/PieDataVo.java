@@ -1,9 +1,9 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
 /**
  * 饼图的数据封装
  */
-public class ResultPieData {
+public class PieDataVo {
     private String name;
 
     private int value;

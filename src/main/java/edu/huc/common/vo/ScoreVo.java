@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultScore {
+public class ScoreVo {
     private String userName;
 
     private String name;

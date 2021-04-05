@@ -1,8 +1,8 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
 import java.util.List;
 
-public class ResultPage {
+public class PageVo {
     private List data;
 
     private long pageSize;//总页数

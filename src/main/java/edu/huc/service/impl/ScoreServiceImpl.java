@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import edu.huc.bean.*;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultScore;
+import edu.huc.common.vo.ScoreVo;
 import edu.huc.dao.*;
 import edu.huc.service.IScoreService;
 import org.springframework.stereotype.Service;
@@ -51,14 +51,14 @@ public class ScoreServiceImpl implements IScoreService {
         List<Score> scores = scoreMapper.queryScore(minor.getName());
         if (scores.isEmpty())
             return new RespData(RespCode.WRONG);
-        List<ResultScore> scoreList = convertScoreList(scores);
+        List<ScoreVo> scoreList = convertScoreList(scores);
         return new RespData(RespCode.SUCCESS,scoreList);
     }
 
-    private List<ResultScore> convertScoreList(List<Score> scoreList){
-        List<ResultScore> list = new ArrayList();
+    private List<ScoreVo> convertScoreList(List<Score> scoreList){
+        List<ScoreVo> list = new ArrayList();
         for (int i = 0;i < scoreList.size();i ++){
-            ResultScore resultScore = new ResultScore();
+            ScoreVo resultScore = new ScoreVo();
             Score score = scoreList.get(i);
             resultScore.setUserName(score.getUsername());
             resultScore.setName(score.getName());
@@ -77,7 +77,7 @@ public class ScoreServiceImpl implements IScoreService {
         List<Score> scores = scoreMapper.queryMyScore(user.getUsername());
         if (scores.isEmpty())
             return new RespData(RespCode.WRONG);
-        List<ResultScore> scoreList = convertScoreList(scores);
+        List<ScoreVo> scoreList = convertScoreList(scores);
         return new RespData(RespCode.SUCCESS,scoreList);
     }
 }

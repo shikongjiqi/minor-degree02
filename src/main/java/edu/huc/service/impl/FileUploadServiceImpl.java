@@ -5,7 +5,7 @@ import edu.huc.bean.EntryForm;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.FileResult;
+import edu.huc.common.vo.FileVo;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.IFileUploadService;
@@ -55,9 +55,9 @@ public class FileUploadServiceImpl implements IFileUploadService {
      * @return 成功返回文件信息，失败返回-null
      */
     @Override
-    public FileResult uploadFile(MultipartFile file, String userName) {
+    public FileVo uploadFile(MultipartFile file, String userName) {
         String path = getUploadPath(IMAGES);
-        FileResult result = new FileResult(false, null);
+        FileVo result = new FileVo(false, null);
         if (path != null && file != null && !file.isEmpty()) {
             long realSize = file.getSize();
             result.setFileSize(realSize);

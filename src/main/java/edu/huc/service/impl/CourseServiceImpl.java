@@ -7,7 +7,7 @@ import edu.huc.bean.Teacher;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultCourse;
+import edu.huc.common.vo.CourseVo;
 import edu.huc.dao.CourseMapper;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.TeacherMapper;
@@ -69,14 +69,14 @@ public class CourseServiceImpl implements ICourseService {
         if (courseList.isEmpty()){
             return new RespData(RespCode.WRONG);
         }
-        List<ResultCourse> list = convertList(courseList);
+        List<CourseVo> list = convertList(courseList);
         return new RespData(RespCode.SUCCESS,list);
     }
 
-    private List<ResultCourse> convertList(List<Course> list){
-        List<ResultCourse> courseList = new ArrayList<>();
+    private List<CourseVo> convertList(List<Course> list){
+        List<CourseVo> courseList = new ArrayList<>();
         for (Course c: list) {
-            ResultCourse course = new ResultCourse();
+            CourseVo course = new CourseVo();
             course.setCourseId(c.getCourseId());
             course.setCourseName(c.getCourseName());
             course.setTimeTable(c.getTimeTable());

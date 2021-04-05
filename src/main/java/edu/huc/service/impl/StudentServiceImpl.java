@@ -5,13 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Student;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultStudent;
+import edu.huc.common.vo.StudentVo;
 import edu.huc.dao.StudentMapper;
 import edu.huc.service.IStudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class StudentServiceImpl implements IStudentService {
@@ -34,7 +33,7 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public RespData selectMessage(int studentId) {
         Student student = studentMapper.selectById(studentId);
-        ResultStudent resultStudent = ResultStudent(student);
+        StudentVo resultStudent = ResultStudent(student);
         return new RespData(RespCode.SUCCESS,resultStudent);
     }
 
@@ -57,8 +56,8 @@ public class StudentServiceImpl implements IStudentService {
         studentMapper.deleteById(studentId);
     }
 
-    private ResultStudent ResultStudent(Student student){
-        ResultStudent resultStudent = new ResultStudent();
+    private StudentVo ResultStudent(Student student){
+        StudentVo resultStudent = new StudentVo();
         resultStudent.setStudentId(student.getStudentId());
         resultStudent.setStudentName(student.getUserName());
         resultStudent.setClasses(student.getClasses());

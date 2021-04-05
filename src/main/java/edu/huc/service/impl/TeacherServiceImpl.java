@@ -5,13 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.huc.bean.Teacher;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultTeacher;
+import edu.huc.common.vo.TeacherVo;
 import edu.huc.dao.TeacherMapper;
 import edu.huc.service.ITeacherService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements ITeacherService {
@@ -33,7 +32,7 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public RespData selectTeacherById(int teacherId) {
         Teacher teacher = teacherMapper.selectById(teacherId);
-        ResultTeacher resultTeacher = ResultTeacher(teacher);
+        TeacherVo resultTeacher = ResultTeacher(teacher);
         return new RespData(RespCode.SUCCESS,resultTeacher);
     }
 
@@ -57,8 +56,8 @@ public class TeacherServiceImpl implements ITeacherService {
         teacherMapper.delete(queryWrapper);
     }
 
-    private ResultTeacher ResultTeacher(Teacher teacher){
-        ResultTeacher teachers = new ResultTeacher();
+    private TeacherVo ResultTeacher(Teacher teacher){
+        TeacherVo teachers = new TeacherVo();
         teachers.setTeacherId(teacher.getTeacherId());
         teachers.setTeacherProfessional(teacher.getProfessional());
         teachers.setTeacherName(teacher.getUserName());

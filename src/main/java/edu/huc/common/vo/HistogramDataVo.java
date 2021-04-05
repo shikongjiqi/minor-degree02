@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultHistogramData {
+public class HistogramDataVo {
     private String[] dataX;
 
     private int[] dataY;

@@ -6,8 +6,8 @@ import edu.huc.bean.User;
 import edu.huc.common.constant.UserRole;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultAdminUser;
-import edu.huc.common.result.ResultUser;
+import edu.huc.common.vo.AdminUserVo;
+import edu.huc.common.vo.ResultUser;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -91,7 +91,7 @@ public class UserServiceImpl implements IUserService {
     //  管理员查询用户所要修改的用户的信息
     public RespData adminSelectById(int userId){
         User user = userMapper.selectById(userId);
-        ResultAdminUser resultAdminUser = requestUser(user);
+        AdminUserVo resultAdminUser = requestUser(user);
         return new RespData(RespCode.SUCCESS,resultAdminUser);
     }
 
@@ -107,8 +107,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     //  数据封装
-    private ResultAdminUser requestUser(User user){
-        ResultAdminUser result = new ResultAdminUser();
+    private AdminUserVo requestUser(User user){
+        AdminUserVo result = new AdminUserVo();
         result.setUserId(user.getUserId());
         result.setUsername(user.getUsername());
         result.setPassword(user.getPassword());

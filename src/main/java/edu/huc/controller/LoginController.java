@@ -3,7 +3,7 @@ package edu.huc.controller;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultUser;
+import edu.huc.common.vo.ResultUser;
 import edu.huc.service.IUserService;
 import edu.huc.util.JwtUtils;
 import org.springframework.web.bind.annotation.PostMapping;

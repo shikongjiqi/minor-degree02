@@ -5,8 +5,8 @@ import edu.huc.bean.Academy;
 import edu.huc.bean.Major;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.result.ResultHistogramData;
-import edu.huc.common.result.ResultPieData;
+import edu.huc.common.vo.HistogramDataVo;
+import edu.huc.common.vo.PieDataVo;
 import edu.huc.dao.AcademyMapper;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.MajorMapper;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service
 public class ChartServiceImpl implements IChartService {
@@ -31,9 +30,9 @@ public class ChartServiceImpl implements IChartService {
     @Override
     public RespData statics(int minorId) {
         List<Academy> academyList = academyMapper.selectList(null);
-        List<ResultPieData> list = new ArrayList<>();
+        List<PieDataVo> list = new ArrayList<>();
         for (int i = 0;i < academyList.size();i++){
-            ResultPieData resultPieData = new ResultPieData();
+            PieDataVo resultPieData = new PieDataVo();
             QueryWrapper queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("academy_id",academyList.get(i).getAcademyId());
             List<Major> majors = majorMapper.selectList(queryWrapper);
@@ -51,7 +50,7 @@ public class ChartServiceImpl implements IChartService {
     //生成柱状图
     @Override
     public RespData histogram(int minorId, String academyName) {
-        ResultHistogramData resultHistogramData = new ResultHistogramData();
+        HistogramDataVo resultHistogramData = new HistogramDataVo();
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("academy_name",academyName);
         Academy academy = academyMapper.selectOne(queryWrapper);

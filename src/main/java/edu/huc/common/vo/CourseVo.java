@@ -1,6 +1,6 @@
-package edu.huc.common.result;
+package edu.huc.common.vo;
 
-public class ResultCourse {
+public class CourseVo {
     private int courseId;
 
     private String courseName;
