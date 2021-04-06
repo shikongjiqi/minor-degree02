@@ -13,17 +13,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+//该注解用来校验用户是否登录
+@RequiresAuthentication
 @RequestMapping("/user")
 public class UserController {
     @Resource
     private IUserService userService;
 
     //退出账号
-    //该注解用来校验用户是否登录
-    @RequiresAuthentication
-    @GetMapping("/editUser")
-    public RespData editUser(HttpSession session){
-        //移除session中的数据
+    @GetMapping("/logout")
+    public RespData logout(){
         SecurityUtils.getSubject().logout();
         //返回登录页
         return new RespData(RespCode.SUCCESS);

@@ -32,7 +32,7 @@ public class LoginController {
         ResultUser result = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
         String jwt = jwtUtils.generateToken(result.getUserId());
         response.setHeader("Authorization",jwt);
-        response.setHeader("Access-control-Expose-Header","Authorization");
+        response.setHeader("Access-control-Expose-Headers","Authorization");
         return new RespData(RespCode.SUCCESS,result);
     }
 

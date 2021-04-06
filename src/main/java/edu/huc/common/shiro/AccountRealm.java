@@ -40,7 +40,6 @@ public class AccountRealm extends AuthorizingRealm {
         if(user == null){
             throw new UnknownAccountException("账号不存在");
         }
-        System.out.println("---------------------");
         UserVo profile = new UserVo();
         BeanUtils.copyProperties(user,profile);
         return new SimpleAuthenticationInfo(profile,jwtToken.getCredentials(),getName());
