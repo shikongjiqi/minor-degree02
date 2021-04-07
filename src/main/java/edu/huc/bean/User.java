@@ -9,7 +9,7 @@ import lombok.Data;
 @TableName("tb_users")
 public class User {
     @TableId(value = "user_id",type = IdType.AUTO)
-    private Integer userId;
+    private Integer id;
 
     private String username;
 

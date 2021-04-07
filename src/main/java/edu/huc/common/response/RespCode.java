@@ -16,7 +16,8 @@ public enum RespCode {
     USER_LOCKED(400,"操作失败"),
     REPETITION(200,"已经报名"),
     WAIT_CHECK(200,"等待老师审核"),
-    DOWN_ERROR(400,"下载失败");
+    DOWN_ERROR(400,"下载失败"),
+    DONT_FOUND(404,"未找到");
 
     private Integer code;
     private String msg;

@@ -20,7 +20,7 @@ public class BackupCopyServiceImpl implements IBackupCopyService {
     public void insertMessage(int userId) {
         User deleteUser = userMapper.selectById(userId);
         BackupCopy backupCopy = new BackupCopy();
-        backupCopy.setUserId(deleteUser.getUserId());
+        backupCopy.setUserId(deleteUser.getId());
         backupCopy.setUsername(deleteUser.getUsername());
         backupCopy.setPassword(deleteUser.getPassword());
         backupCopy.setName(deleteUser.getName());

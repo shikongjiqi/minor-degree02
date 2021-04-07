@@ -18,8 +18,6 @@ import java.util.List;
 public class MenuController {
     @Resource
     private IMenuService menuService;
-    @Resource
-    private JwtUtils jwtUtils;
 
     /**
      * 获取菜单列表

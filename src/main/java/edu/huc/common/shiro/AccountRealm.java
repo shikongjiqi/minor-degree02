@@ -1,6 +1,5 @@
 package edu.huc.common.shiro;
 
-import edu.huc.bean.User;
 import edu.huc.common.vo.UserVo;
 import edu.huc.service.IUserService;
 import edu.huc.util.JwtUtils;
@@ -8,7 +7,6 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -36,12 +34,10 @@ public class AccountRealm extends AuthorizingRealm {
         JwtToken jwtToken = (JwtToken) token;
 
         String userId = jwtUtils.getClaimByToken((String) jwtToken.getPrincipal()).getSubject();
-        User user = userService.getById(Integer.valueOf(userId));
+        UserVo user = userService.getById(Integer.valueOf(userId));
         if(user == null){
             throw new UnknownAccountException("账号不存在");
         }
-        UserVo profile = new UserVo();
-        BeanUtils.copyProperties(user,profile);
-        return new SimpleAuthenticationInfo(profile,jwtToken.getCredentials(),getName());
+        return new SimpleAuthenticationInfo(user,jwtToken.getCredentials(),getName());
     }
 }

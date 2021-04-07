@@ -1,13 +1,13 @@
 package edu.huc.service;
 
 import edu.huc.bean.User;
+import edu.huc.common.vo.UserVo;
 import edu.huc.common.response.RespData;
-import edu.huc.common.vo.ResultUser;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface IUserService {
-    ResultUser login(String username, String password);
+    UserVo login(String username, String password);
 
     RespData register(User user);
 
@@ -21,7 +21,7 @@ public interface IUserService {
 
     void deleteUserMessage(int userId);
 
-    User getById(int userId);
+    UserVo getById(int userId);
 
-    ResultUser convertUser(User user);
+    UserVo convertUser(User user);
 }

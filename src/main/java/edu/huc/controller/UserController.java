@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 //该注解用来校验用户是否登录
-@RequiresAuthentication
 @RequestMapping("/user")
 public class UserController {
     @Resource
@@ -22,6 +21,7 @@ public class UserController {
 
     //退出账号
     @GetMapping("/logout")
+    @RequiresAuthentication
     public RespData logout(){
         SecurityUtils.getSubject().logout();
         //返回登录页
@@ -33,6 +33,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/delUser")
+    @RequiresAuthentication
     public RespData delUser(HttpSession session){
         int id = (Integer)session.getAttribute("userId");
         RespData respData = userService.delUser(id);

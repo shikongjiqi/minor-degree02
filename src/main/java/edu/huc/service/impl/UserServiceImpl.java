@@ -7,7 +7,7 @@ import edu.huc.common.constant.UserRole;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.vo.AdminUserVo;
-import edu.huc.common.vo.ResultUser;
+import edu.huc.common.vo.UserVo;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -26,31 +26,31 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     @Override
-    public ResultUser login(String username, String password) {
+    public UserVo login(String username, String password) {
         QueryWrapper<User> queryWrapper = new QueryWrapper();
         queryWrapper.eq("username",username).eq("password",password);
         User user = userMapper.selectOne(queryWrapper);//根据用户名、密码 查询
         if (user == null){
             return null;
         }
-        ResultUser result = convertUser(user);
+        UserVo result = convertUser(user);
         return result;
     }
 
     //将查询出的user信息转为前端所需的字段
-    public ResultUser convertUser(User user){
-        ResultUser result = null;
+    public UserVo convertUser(User user){
+        UserVo result = null;
         if ("学生".equals(user.getIdentity())){
-            result = new ResultUser(UserRole.STUDENT);
+            result = new UserVo(UserRole.STUDENT);
         }
         if ("老师".equals(user.getIdentity())){
-            result = new ResultUser(UserRole.TEACHER);
+            result = new UserVo(UserRole.TEACHER);
         }
         if ("admin".equals(user.getIdentity())){
-            result = new ResultUser(UserRole.ADMIN);
+            result = new UserVo(UserRole.ADMIN);
         }
-        result.setUserId(user.getUserId());
-        result.setUserName(user.getName());
+        result.setId(user.getId());
+        result.setUsername(user.getUsername());
         result.setName(user.getName());
         return result;
     }
@@ -101,15 +101,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getById(int userId) {
+    public UserVo getById(int userId) {
         User user = userMapper.selectById(userId);
-        return user;
+        UserVo userVo = convertUser(user);
+        return userVo;
     }
 
     //  数据封装
     private AdminUserVo requestUser(User user){
         AdminUserVo result = new AdminUserVo();
-        result.setUserId(user.getUserId());
+        result.setUserId(user.getId());
         result.setUsername(user.getUsername());
         result.setPassword(user.getPassword());
         result.setName(user.getName());

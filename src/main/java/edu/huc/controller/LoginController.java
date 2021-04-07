@@ -3,7 +3,7 @@ package edu.huc.controller;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
-import edu.huc.common.vo.ResultUser;
+import edu.huc.common.vo.UserVo;
 import edu.huc.service.IUserService;
 import edu.huc.util.JwtUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +29,8 @@ public class LoginController {
      */
     @PostMapping("/login")
     public RespData login(@RequestBody User user, HttpServletResponse response){
-        ResultUser result = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
-        String jwt = jwtUtils.generateToken(result.getUserId());
+        UserVo result = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
+        String jwt = jwtUtils.generateToken(result.getId());
         response.setHeader("Authorization",jwt);
         response.setHeader("Access-control-Expose-Headers","Authorization");
         return new RespData(RespCode.SUCCESS,result);
