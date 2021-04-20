@@ -46,6 +46,7 @@ public class UserController {
      * @return
      */
     @GetMapping(value = "/queryUser")
+    @RequiresAuthentication
     public RespData adminQueryUser(@RequestParam(value = "page",defaultValue = "1") int page){
         RespData respData = userService.adminQueryUser(page);
         return respData;
@@ -57,6 +58,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/updateUser")
+    @RequiresAuthentication
     public RespData updateUser(int userId,Model model){
         RespData respData = userService.adminSelectById(userId);
         return respData;
@@ -68,6 +70,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/update_user1")
+    @RequiresAuthentication
     public RespData updateUser1(@RequestBody User user){
         userService.adminUpdateUser(user);
         return new RespData(RespCode.SUCCESS);
@@ -79,6 +82,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/deleteUser")
+    @RequiresAuthentication
     public RespData deleteUser(int userId){
         userService.deleteUserMessage(userId);
         return new RespData(RespCode.SUCCESS);

@@ -10,7 +10,7 @@ public interface IEntryFormService {
 
     RespData check(Integer id);
 
-    RespData queryToAudit();
+    RespData queryToAudit(int page);
 
     RespData checkApply(int entryFormId);
 

@@ -62,8 +62,8 @@ public class EntryFormController {
      * @return
      */
     @GetMapping("/queryToAudit")
-    public RespData queryToAudit(){
-        RespData respData = entryFormService.queryToAudit();
+    public RespData queryToAudit(@RequestParam(name = "page",defaultValue = "1") int page){
+        RespData respData = entryFormService.queryToAudit(page);
         return respData;
     }
 

@@ -69,15 +69,13 @@ public class EntryFormServiceImpl implements IEntryFormService {
 
     //查询没有审核的报名数据
     @Override
-    public RespData queryToAudit() {
+    public RespData queryToAudit(int page) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("checked",1);
-        List<EntryForm> entryFormList = entryFormMapper.selectList(queryWrapper);
-        if (entryFormList.isEmpty()){
-            return new RespData(RespCode.SUCCESS);
-        }
-        List<EntryFormVo> list = convertUserList(entryFormList);
-        return new RespData(RespCode.SUCCESS,list);
+        Page entryFormList = entryFormMapper.selectPage(new Page<>(page, 10), queryWrapper);
+        List<EntryFormVo> list = convertUserList(entryFormList.getRecords());
+        entryFormList.setRecords(list);
+        return new RespData(RespCode.SUCCESS,entryFormList);
     }
 
     //对报名用户进行审核
@@ -115,11 +113,11 @@ public class EntryFormServiceImpl implements IEntryFormService {
     //将待审核数据转换为我们所需要的，便于页面话处理的对象
     private List<EntryFormVo> convertUserList(List<EntryForm> list){
         List<EntryFormVo> entryFormList = new ArrayList<>();
-        QueryWrapper queryWrapper = new QueryWrapper();
         for (EntryForm entryForm : list) {
             EntryFormVo resultEntryForm = new EntryFormVo();
             resultEntryForm.setEntryFormId(entryForm.getEntryFormId());
             resultEntryForm.setMajorName(entryForm.getMajorName());
+            QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("username",entryForm.getUserName());
             User user = userMapper.selectOne(queryWrapper);
             resultEntryForm.setUserName(user.getName());
