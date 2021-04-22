@@ -20,13 +20,14 @@ public class BackupCopyController {
 
     /**
      * 管理员删除用户信息之前先将用户信息存在backup_copy表中以作备用
+     *
      * @param userId
      * @return
      */
     @GetMapping("admin/insertMessage")
-    public RespData insertNeedDeleteMessage(@RequestParam int userId){
+    public RespData insertNeedDeleteMessage(@RequestParam int userId) {
         backupCopyService.insertMessage(userId);
-        return new RespData(RespCode.SUCCESS,userId);
+        return new RespData(RespCode.SUCCESS, userId);
 
     }
 }

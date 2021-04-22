@@ -22,7 +22,7 @@ public class UserController {
     //退出账号
     @GetMapping("/logout")
     @RequiresAuthentication
-    public RespData logout(){
+    public RespData logout() {
         SecurityUtils.getSubject().logout();
         //返回登录页
         return new RespData(RespCode.SUCCESS);
@@ -30,60 +30,65 @@ public class UserController {
 
     /**
      * 注销账号删除账号信息
+     *
      * @return
      */
     @GetMapping("/delUser")
     @RequiresAuthentication
-    public RespData delUser(HttpSession session){
-        int id = (Integer)session.getAttribute("userId");
+    public RespData delUser(HttpSession session) {
+        int id = (Integer) session.getAttribute("userId");
         RespData respData = userService.delUser(id);
         return respData;
     }
 
     /**
      * 管理员查询用户信息
+     *
      * @param page
      * @return
      */
     @GetMapping(value = "/queryUser")
     @RequiresAuthentication
-    public RespData adminQueryUser(@RequestParam(value = "page",defaultValue = "1") int page){
+    public RespData adminQueryUser(@RequestParam(value = "page", defaultValue = "1") int page) {
         RespData respData = userService.adminQueryUser(page);
         return respData;
     }
 
     /**
      * 管理员查询需要修改的用户的信息
+     *
      * @param
      * @return
      */
     @GetMapping("/updateUser")
     @RequiresAuthentication
-    public RespData updateUser(int userId,Model model){
+    public RespData updateUser(int userId, Model model) {
         RespData respData = userService.adminSelectById(userId);
         return respData;
     }
 
     /**
      * 管理员修改用户信息
+     *
      * @param user
      * @return
      */
     @PostMapping("/update_user1")
     @RequiresAuthentication
-    public RespData updateUser1(@RequestBody User user){
+    public RespData updateUser1(@RequestBody User user) {
         userService.adminUpdateUser(user);
         return new RespData(RespCode.SUCCESS);
     }
 
     /**
      * 管理员删除用户信息
+     *
      * @param userId
      * @return
      */
     @GetMapping("/deleteUser")
     @RequiresAuthentication
-    public RespData deleteUser(int userId){
+    public RespData deleteUser(int userId) {
         userService.deleteUserMessage(userId);
         return new RespData(RespCode.SUCCESS);
     }

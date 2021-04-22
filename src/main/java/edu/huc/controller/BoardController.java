@@ -15,11 +15,12 @@ public class BoardController {
 
     /**
      * 查询公告
+     *
      * @return
      */
     @RequiresAuthentication
     @GetMapping("/getBoard")
-    public RespData board(@RequestParam(defaultValue = "1") int page){
+    public RespData board(@RequestParam(defaultValue = "1") int page) {
         RespData respData = boardService.queryBoard(page);
         return respData;
     }

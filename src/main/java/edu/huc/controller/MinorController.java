@@ -16,16 +16,17 @@ public class MinorController {
 
     /**
      * 跳转到index页面，同时查询一些相关辅修课程到页面
+     *
      * @return
      */
     @GetMapping("/queryMinor")
-    public RespData queryMinor(@RequestParam(value = "page",defaultValue = "1") int page){
+    public RespData queryMinor(@RequestParam(value = "page", defaultValue = "1") int page) {
         RespData respData = minorService.queryMinor(page);//传递页码值，同时查询辅修课程
         return respData;
     }
 
     @PostMapping("/queryTeacherMinor")
-    public RespData queryTeacherMinor(@RequestParam(value = "page",defaultValue = "1") int page){
+    public RespData queryTeacherMinor(@RequestParam(value = "page", defaultValue = "1") int page) {
         RespData respData = minorService.queryMinor(page);//传递页码值，同时查询辅修课程
         return respData;
     }

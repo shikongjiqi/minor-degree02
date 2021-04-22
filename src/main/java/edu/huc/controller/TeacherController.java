@@ -18,25 +18,25 @@ public class TeacherController {
 
     //以json数据格式返回
     @GetMapping("/queryTeacher")
-    public RespData queryTeacher(@RequestParam(defaultValue = "1")int page){
+    public RespData queryTeacher(@RequestParam(defaultValue = "1") int page) {
         RespData respData = teacherService.queryTeacher(page);
         return respData;
     }
 
     @GetMapping("/selectTeacher")
-    public RespData selectTeacher(int teacherId){
+    public RespData selectTeacher(int teacherId) {
         RespData respData = teacherService.selectTeacherById(teacherId);
         return respData;
     }
 
     @PostMapping("/updateTeacher")
-    public RespData updateTeacher(@RequestBody Teacher teacher){
+    public RespData updateTeacher(@RequestBody Teacher teacher) {
         teacherService.adminUpdateTeacherMessage(teacher);
         return new RespData(RespCode.SUCCESS);
     }
 
     @GetMapping("/deleteTeacher")
-    public RespData deleteTeacherMessage(int teacherId){
+    public RespData deleteTeacherMessage(int teacherId) {
         teacherService.deleteTeacherMessage(teacherId);
         return new RespData(RespCode.SUCCESS);
     }

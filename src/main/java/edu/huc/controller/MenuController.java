@@ -8,6 +8,7 @@ import edu.huc.util.JwtUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,12 +22,14 @@ public class MenuController {
 
     /**
      * 获取菜单列表
+     *
      * @return
      */
     @RequiresAuthentication
     @GetMapping("/getMenu")
-    public RespData getMenu(){
-        List<Menu> menuList = menuService.getMenuList(0);
-        return new RespData(RespCode.SUCCESS,menuList);
+    public RespData getMenu() {
+//        int r = Integer.parseInt(role);
+        List<Menu> menuList = menuService.getMenuList(2);
+        return new RespData(RespCode.SUCCESS, menuList);
     }
 }

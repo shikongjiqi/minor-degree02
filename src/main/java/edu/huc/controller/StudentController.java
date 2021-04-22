@@ -18,28 +18,29 @@ public class StudentController {
 
     /**
      * 查询全部学生
+     *
      * @return
      */
     @GetMapping("/queryStudent")
-    public RespData queryStudent(@RequestParam(value = "page",defaultValue = "1")int page){
+    public RespData queryStudent(@RequestParam(value = "page", defaultValue = "1") int page) {
         RespData respData = studentService.queryStudent(page);
         return respData;
     }
 
     @GetMapping("/selectStudent")
-    public RespData selectStudent(int studentId){
+    public RespData selectStudent(int studentId) {
         RespData respData = studentService.selectMessage(studentId);
         return respData;
     }
 
     @PostMapping("/updateStudent")
-    public RespData updateStudent(@RequestBody Student student){
+    public RespData updateStudent(@RequestBody Student student) {
         studentService.adminUpdateMessage(student);
         return new RespData(RespCode.SUCCESS);
     }
 
     @GetMapping("/deleteStudent")
-    public RespData deleteStudent(int studentId){
+    public RespData deleteStudent(int studentId) {
         studentService.deleteStudentMessage(studentId);
         return new RespData(RespCode.SUCCESS);
     }

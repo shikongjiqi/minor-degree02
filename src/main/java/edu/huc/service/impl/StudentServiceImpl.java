@@ -22,7 +22,7 @@ public class StudentServiceImpl implements IStudentService {
         Page selectPage = studentMapper.selectPage(new Page(page, 10), null);
         if (selectPage.getRecords().isEmpty())
             return new RespData(RespCode.USER_LOCKED);
-        return new RespData(RespCode.SUCCESS);
+        return new RespData(RespCode.SUCCESS,selectPage);
     }
 
     /**

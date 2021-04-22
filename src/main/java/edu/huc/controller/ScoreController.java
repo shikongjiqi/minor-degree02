@@ -18,36 +18,24 @@ public class ScoreController {
 
     /**
      * 点名册
-     * @param session
+     *
      * @return
      */
     @PostMapping("/queryMyStudent")
-    public RespData queryMyStudent(HttpSession session){
-        Integer id = (Integer) session.getAttribute("userId");
-        if (id == null || id == 0){
-            return new RespData(RespCode.ERROR_SESSION);
-        }
-        RespData respData = scoreService.queryMyStudent(id);
+    public RespData queryMyStudent(int userId) {
+        RespData respData = scoreService.queryMyStudent(userId);
         return respData;
     }
 
     @GetMapping("/queryScore")
-    public RespData queryScore(HttpSession session){
-        Integer id  = (Integer) session.getAttribute("userId");
-        if(id == null || id == 0){
-            return new RespData(RespCode.ERROR_SESSION);
-        }
-        RespData respData = scoreService.queryScore(id);
+    public RespData queryScore(int userId) {
+        RespData respData = scoreService.queryScore(userId);
         return respData;
     }
 
     @GetMapping("queryMyScore")
-    public RespData queryMyScore(HttpSession session){
-        Integer id  = (Integer) session.getAttribute("userId");
-        if(id == null || id == 0){
-            return new RespData(RespCode.ERROR_SESSION);
-        }
-        RespData respData = scoreService.queryMyScore(id);
+    public RespData queryMyScore(int userId) {
+        RespData respData = scoreService.queryMyScore(userId);
         return respData;
     }
 }
