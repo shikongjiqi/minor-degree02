@@ -34,7 +34,7 @@ public class CourseServiceImpl implements ICourseService {
     public RespData queryMyCourse(int userId) {
         User user = userMapper.selectById(userId);
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("userName",user.getUsername());
+        queryWrapper.eq("user_name",user.getUsername());
         EntryForm entryForm = entryFormMapper.selectOne(queryWrapper);
         if (entryForm == null){
             return new RespData(RespCode.ENPTY);

@@ -31,6 +31,8 @@ public class GlobleExceptionHandler {
             return new RespData(RespCode.EXTEND_MAX_FILESIZE);
         }else if (e instanceof DuplicateKeyException){
             return new RespData(RespCode.DUPLICATE_KEY);
+        }else if(request.getHeader("Authorization") == null|| request.getHeader("Authorization").length() == 0){
+            return new RespData(RespCode.ERROR_SESSION);
         }
         else {
             //TODO:测试环境
