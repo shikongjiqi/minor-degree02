@@ -27,7 +27,6 @@ public class MenuController {
     @RequiresAuthentication
     @GetMapping("/getMenu")
     public RespData getMenu(@RequestParam Integer role) {
-//        int r = Integer.parseInt(role);
         List<Menu> menuList = menuService.getMenuList(role);
         return new RespData(RespCode.SUCCESS, menuList);
     }

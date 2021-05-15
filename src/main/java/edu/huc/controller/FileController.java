@@ -30,16 +30,13 @@ public class FileController {
      * 文件上传--图片
      *
      * @param file
-     * @param request
+     * @param id
      * @return
      * @throws IllegalStateException
      * @throws IOException
      */
     @PostMapping(value = "upload", consumes = "multipart/form-data")
-    public RespData upload(@RequestParam("fileName") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
-        Integer id = (Integer) request.getSession().getAttribute("userId");
-        if (id == null || id == 0)//检验用户是否登录
-            return new RespData(RespCode.ERROR_SESSION);
+    public RespData upload(@RequestParam("fileName") MultipartFile file, @RequestParam Integer id) throws IllegalStateException, IOException {
         boolean flag = fileUploadService.isImg(file);
         if (!flag)//判断文件上传的是否为图片
             return new RespData(RespCode.ERROR_FILE);

@@ -35,11 +35,11 @@ public class GlobleExceptionHandler {
             return new RespData(RespCode.ERROR_SESSION);
         }
         else {
-            //TODO:测试环境
-            e.printStackTrace();
-            return new RespData(RespCode.WRONG,e.toString());
-            //TODO:生产环境
-            //return new ResEntity(RespCode.WRONG);
+            //测试环境
+//            e.printStackTrace();
+//            return new RespData(RespCode.WRONG,e.toString());
+            //生产环境
+            return new RespData(RespCode.WRONG);
         }
     }
 }

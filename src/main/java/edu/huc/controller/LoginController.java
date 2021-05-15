@@ -30,7 +30,10 @@ public class LoginController {
      */
     @PostMapping("/login")
     public RespData login(@RequestBody User user, HttpServletResponse response) {
-        UserVo result = userService.login(user.getUsername(), user.getPassword());//根据账号、密码登录
+        UserVo result = userService.login(user.getUsername(), user.getPassword());//根据账号、
+        if(result == null){
+            return new RespData(RespCode.ERROR_USER);
+        }
         String jwt = jwtUtils.generateToken(result.getId());
         response.setHeader("Authorization", jwt);
         response.setHeader("Access-control-Expose-Headers", "Authorization");

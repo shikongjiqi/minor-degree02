@@ -44,8 +44,9 @@ public class CourseController {
      * @return
      */
     @GetMapping("/queryAboutCourse")
-    public RespData queryAboutCourse(int minorId) {
-        RespData respData = courseService.queryAboutCourse(minorId);
+    public RespData queryAboutCourse(@RequestParam String minorId) {
+        Integer id = Integer.parseInt(minorId);
+        RespData respData = courseService.queryAboutCourse(id);
         return respData;
     }
 }

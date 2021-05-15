@@ -7,6 +7,7 @@ import edu.huc.common.constant.UserRole;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.common.vo.AdminUserVo;
+import edu.huc.common.vo.UserInfoVo;
 import edu.huc.common.vo.UserVo;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.IUserService;
@@ -49,10 +50,29 @@ public class UserServiceImpl implements IUserService {
         if ("admin".equals(user.getIdentity())){
             result = new UserVo(UserRole.ADMIN);
         }
+        if ("academy".equals(user.getIdentity())){
+            result = new UserVo(UserRole.TOURIST);
+        }
+        if ("superadmin".equals(user.getIdentity())){
+            result = new UserVo(UserRole.SUPER_ADMIN);
+        }
         result.setId(user.getId());
         result.setUsername(user.getUsername());
         result.setName(user.getName());
         return result;
+    }
+
+    @Override
+    public UserInfoVo queryUserInfo(int userId) {
+        UserInfoVo user = userMapper.selectUserInfoById(userId);
+        return user;
+    }
+
+    @Override
+    public UserInfoVo editPassword(String newPassword,int userId) {
+        userMapper.editPassword(newPassword, userId);
+        UserInfoVo user = userMapper.selectUserInfoById(userId);
+        return user;
     }
 
     /**

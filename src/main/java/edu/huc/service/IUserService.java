@@ -1,6 +1,7 @@
 package edu.huc.service;
 
 import edu.huc.bean.User;
+import edu.huc.common.vo.UserInfoVo;
 import edu.huc.common.vo.UserVo;
 import edu.huc.common.response.RespData;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,8 @@ public interface IUserService {
     UserVo getById(int userId);
 
     UserVo convertUser(User user);
+
+    UserInfoVo queryUserInfo(int userId);
+
+    UserInfoVo editPassword(String newPassword,int userId);
 }

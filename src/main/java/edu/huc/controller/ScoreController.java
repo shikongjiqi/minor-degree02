@@ -33,7 +33,7 @@ public class ScoreController {
         return respData;
     }
 
-    @GetMapping("queryMyScore")
+    @GetMapping("/queryMyScore")
     public RespData queryMyScore(int userId) {
         RespData respData = scoreService.queryMyScore(userId);
         return respData;

@@ -3,6 +3,8 @@ package edu.huc.controller;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
+import edu.huc.common.vo.PasswordVo;
+import edu.huc.common.vo.UserInfoVo;
 import edu.huc.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -91,5 +93,29 @@ public class UserController {
     public RespData deleteUser(int userId) {
         userService.deleteUserMessage(userId);
         return new RespData(RespCode.SUCCESS);
+    }
+
+    /**
+     * 用户中心显示的数据
+     * @param userId
+     * @return
+     */
+    @GetMapping("/queryMyInfo")
+    @RequiresAuthentication
+    public RespData queryUserInfo(int userId){
+        UserInfoVo user = userService.queryUserInfo(userId);
+        return new RespData(RespCode.SUCCESS,user);
+    }
+
+    /**
+     * 修改密码
+     * @param passwordVo
+     * @return
+     */
+    @PostMapping("/editPassword")
+    @RequiresAuthentication
+    public RespData editPassword(@RequestBody PasswordVo passwordVo){
+        UserInfoVo user = userService.editPassword(passwordVo.getNewPassword(),passwordVo.getUserId());
+        return new RespData(RespCode.SUCCESS,user);
     }
 }
