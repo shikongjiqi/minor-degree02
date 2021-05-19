@@ -36,10 +36,10 @@ public class GlobleExceptionHandler {
         }
         else {
             //测试环境
-//            e.printStackTrace();
-//            return new RespData(RespCode.WRONG,e.toString());
+            e.printStackTrace();
+            return new RespData(RespCode.WRONG,e.toString());
             //生产环境
-            return new RespData(RespCode.WRONG);
+//            return new RespData(RespCode.WRONG);
         }
     }
 }

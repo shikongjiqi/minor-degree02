@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 
 @RestController
 @RequiresAuthentication
-@RequestMapping("/admin")
 public class ChartController {
     @Resource
     private IChartService chartService;

@@ -64,7 +64,7 @@ public class UserController {
      */
     @GetMapping("/updateUser")
     @RequiresAuthentication
-    public RespData updateUser(int userId, Model model) {
+    public RespData updateUser(int userId) {
         RespData respData = userService.adminSelectById(userId);
         return respData;
     }

@@ -9,8 +9,6 @@ import edu.huc.service.IBoardService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-
 
 @Service
 public class BoardServiceImpl implements IBoardService {
@@ -21,9 +19,16 @@ public class BoardServiceImpl implements IBoardService {
     @Override
     public RespData queryBoard(int page) {
         Page<Board> boardPage = boardMapper.selectPage(new Page<>(page, 10), null);
+        System.out.println(boardPage.getRecords());
         if (boardPage.getRecords().isEmpty()){
             return new RespData(RespCode.SUCCESS,null);
         }
         return new RespData(RespCode.SUCCESS,boardPage);
+    }
+
+    @Override
+    public int insert(Board board) {
+        int insert = boardMapper.insert(board);
+        return insert;
     }
 }
