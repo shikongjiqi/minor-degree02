@@ -9,4 +9,6 @@ public interface IBoardService {
     RespData queryBoard(int page);
 
     int insert(Board board);
+
+    void insertBoard(String title,String callBoard);
 }

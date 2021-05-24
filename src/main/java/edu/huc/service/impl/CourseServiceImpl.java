@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import edu.huc.bean.Course;
 import edu.huc.bean.EntryForm;
 import edu.huc.bean.Teacher;
+import edu.huc.bean.Minor;
 import edu.huc.bean.User;
 import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
@@ -11,6 +12,7 @@ import edu.huc.common.vo.CourseVo;
 import edu.huc.dao.CourseMapper;
 import edu.huc.dao.EntryFormMapper;
 import edu.huc.dao.TeacherMapper;
+import edu.huc.dao.MinorMapper;
 import edu.huc.dao.UserMapper;
 import edu.huc.service.ICourseService;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,8 @@ public class CourseServiceImpl implements ICourseService {
     private EntryFormMapper entryFormMapper;
     @Resource
     private TeacherMapper teacherMapper;
+    @Resource
+    private MinorMapper minorMapper;
 
     @Override
     public RespData queryMyCourse(int userId) {
@@ -51,8 +55,9 @@ public class CourseServiceImpl implements ICourseService {
     }
 
     @Override
-    public RespData queryTeacherCourse(int id) {
-        Teacher teacher = teacherMapper.selectById(id);
+    public RespData queryTeacherCourse(int userId) {
+        int teacherId = teacherMapper.queryTeacher(userId);
+        Teacher teacher = teacherMapper.selectById(teacherId);
         if (teacher == null)
             return new RespData(RespCode.WRONG);
         List<Course> courses = courseMapper.queryTeacherCourse(teacher.getTeacherId());
@@ -63,6 +68,18 @@ public class CourseServiceImpl implements ICourseService {
         return new RespData(RespCode.SUCCESS,courses);
     }
 
+    public RespData queryTeacherCourse2(int userId) {
+        int teacherId = teacherMapper.queryTeacher(userId);
+        Teacher teacher = teacherMapper.selectById(teacherId);
+        if (teacher == null)
+            return new RespData(RespCode.WRONG);
+        List<CourseVo> courses = courseMapper.queryTeacherCourse2(teacher.getTeacherId());
+        if (courses == null)
+            return new RespData(RespCode.SUCCESS,null);
+        if (courses.isEmpty())
+            return new RespData(RespCode.SUCCESS,null);
+        return new RespData(RespCode.SUCCESS,courses);
+    }
     @Override
     public RespData queryAboutCourse(int minorId) {
         List<Course> courseList = courseMapper.queryMyCourse(minorId);
@@ -80,6 +97,8 @@ public class CourseServiceImpl implements ICourseService {
             course.setCourseId(c.getCourseId());
             course.setCourseName(c.getCourseName());
             course.setTimeTable(c.getTimeTable());
+            Minor minor = minorMapper.selectById(c.getMinorId());
+            course.setMinorName(minor.getName());
             Teacher teacher = teacherMapper.selectById(c.getTeacherId());
             course.setTeacherName(teacher.getUserName());
             courseList.add(course);

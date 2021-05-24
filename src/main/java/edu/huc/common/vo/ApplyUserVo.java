@@ -1,6 +1,8 @@
 package edu.huc.common.vo;
 
 public class ApplyUserVo {
+    private int id;
+
     private String name;
 
     private String majorName;
@@ -16,6 +18,14 @@ public class ApplyUserVo {
     private double averageScore;
 
     private String interestCourse;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 public interface ICourseService {
     RespData queryMyCourse(int userId);
 
-    RespData queryTeacherCourse(int id);
+    RespData queryTeacherCourse(int userId);
+
+    RespData queryTeacherCourse2(int userId);
 
     RespData queryAboutCourse(int minorId);
 }

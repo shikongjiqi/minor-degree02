@@ -110,6 +110,11 @@ public class EntryFormServiceImpl implements IEntryFormService {
         return new RespData(RespCode.SUCCESS);
     }
 
+    @Override
+    public void deleteEntry(int entryFormId) {
+        entryFormMapper.deleteById(entryFormId);
+    }
+
     //将待审核数据转换为我们所需要的，便于页面话处理的对象
     private List<EntryFormVo> convertUserList(List<EntryForm> list){
         List<EntryFormVo> entryFormList = new ArrayList<>();
@@ -148,6 +153,7 @@ public class EntryFormServiceImpl implements IEntryFormService {
             resultApplyUser.setCardId(entryForm.getCardId());
             Minor minor = minorMapper.selectById(entryForm.getMinorId());
             resultApplyUser.setMinorName(minor.getName());
+            resultApplyUser.setId(entryForm.getEntryFormId());
             userList.add(resultApplyUser);
         }
         return userList;

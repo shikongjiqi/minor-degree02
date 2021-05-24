@@ -1,6 +1,7 @@
 package edu.huc.controller;
 
 import edu.huc.bean.EntryForm;
+import edu.huc.common.response.RespCode;
 import edu.huc.common.response.RespData;
 import edu.huc.service.IEntryFormService;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -48,7 +49,7 @@ public class EntryFormController {
     /**
      * 检验用户是否在登录状态下进行操作
      *
-     * @param session
+     * @param userId
      * @return
      */
     @GetMapping("/entryFrom")
@@ -87,5 +88,11 @@ public class EntryFormController {
     public RespData allApply() {
         RespData respData = entryFormService.allApply();
         return respData;
+    }
+
+    @GetMapping("/deleteEntry")
+    public RespData deleteEntry(int entryFormId){
+        entryFormService.deleteEntry(entryFormId);
+        return new RespData(RespCode.SUCCESS);
     }
 }

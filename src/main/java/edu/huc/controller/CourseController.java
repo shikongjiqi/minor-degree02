@@ -27,16 +27,26 @@ public class CourseController {
     }
 
     /**
-     * 查询教师相关课程
+     * 教师录入成绩之前所展示的该老师教授的课程
      *
      * @return
      */
     @GetMapping("/queryTeacherCourse")
     public RespData queryTeacherCourse(int userId) {
-        RespData respData = courseService.queryTeacherCourse(userId);
+        RespData respData = courseService.queryTeacherCourse2(userId);
         return respData;
     }
 
+    /**
+     * 查询本教师所教授课程的上课时间
+     * @param userId
+     * @return
+     */
+    @GetMapping("/queryTeacherCourse1")
+    public RespData queryTeacherCourse1(int userId) {
+        RespData respData = courseService.queryTeacherCourse(userId);
+        return respData;
+    }
     /**
      * 查询与该辅修学位相关课程
      *

@@ -27,6 +27,17 @@ public class ScoreController {
         return respData;
     }
 
+    /**
+     * 老师查询学生成绩
+     * @param userId
+     * @return
+     */
+    @GetMapping("/queryMyCourse")
+    public RespData queryMyCourse(int userId){
+        RespData respData = scoreService.queryMyCourse(userId);
+        return respData;
+    }
+
     @GetMapping("/queryScore")
     public RespData queryScore(int userId) {
         RespData respData = scoreService.queryScore(userId);

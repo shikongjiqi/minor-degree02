@@ -17,4 +17,6 @@ public interface IEntryFormService {
     RespData queryApplyUser(int page);
 
     RespData allApply();
+
+    void deleteEntry(int entryFormId);
 }

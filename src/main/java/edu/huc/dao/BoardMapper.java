@@ -11,4 +11,7 @@ import java.util.List;
 public interface BoardMapper extends BaseMapper<Board> {
     @Select({"select * from tb_board"})
     List<Board> queryBoard();
+
+    @Select({"insert into tb_board (title,call_board) values(title,callBoard)"})
+    void insertBoard(String title,String callBoard);
 }

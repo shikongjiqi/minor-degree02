@@ -31,4 +31,10 @@ public class BoardServiceImpl implements IBoardService {
         int insert = boardMapper.insert(board);
         return insert;
     }
+
+    @Override
+    public void insertBoard(String title, String callBoard) {
+        boardMapper.insertBoard(title, callBoard);
+
+    }
 }

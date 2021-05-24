@@ -19,6 +19,16 @@ public class AdminUserVo {
 
     private String identity;
 
+    private String cardId;
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
     public int getUserId() {
         return userId;
     }

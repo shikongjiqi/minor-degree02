@@ -5,9 +5,19 @@ public class CourseVo {
 
     private String courseName;
 
+    private String minorName;
+
     private String timeTable;
 
-    private String teacherName;
+    private String userName;
+
+    public String getMinorName() {
+        return minorName;
+    }
+
+    public void setMinorName(String minorName) {
+        this.minorName = minorName;
+    }
 
     public int getCourseId() {
         return courseId;
@@ -34,10 +44,10 @@ public class CourseVo {
     }
 
     public String getTeacherName() {
-        return teacherName;
+        return userName;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setTeacherName(String userName) {
+        this.userName = userName;
     }
 }

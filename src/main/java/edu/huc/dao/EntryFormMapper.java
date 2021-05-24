@@ -14,4 +14,6 @@ public interface EntryFormMapper extends BaseMapper<EntryForm> {
 
     @Select("select count(*) from tb_entry_form e, tb_major m where e.major_name = m.major_name and e.major_name = #{majorName}")
     Integer selectCountEntryForm(String majorName);
+
+
 }

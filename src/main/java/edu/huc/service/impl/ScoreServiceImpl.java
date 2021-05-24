@@ -41,6 +41,16 @@ public class ScoreServiceImpl implements IScoreService {
     }
 
     @Override
+    public RespData queryMyCourse(int userId){
+        int teacherId = teacherMapper.queryTeacher(userId);
+        List<ScoreVo> scores = scoreMapper.queryMyCourse(teacherId);
+        if (scores.isEmpty()){
+            return new RespData(RespCode.SUCCESS,null);
+        }
+        return new RespData(RespCode.SUCCESS,scores);
+    }
+
+    @Override
     public RespData queryScore(int id) {
         //查询有疑问
         //不记得查询条件

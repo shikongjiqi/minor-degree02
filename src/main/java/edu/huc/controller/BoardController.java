@@ -34,4 +34,9 @@ public class BoardController {
         int insert = boardService.insert(board);
         return new RespData(RespCode.SUCCESS,insert);
     }
+
+    public void insertBoard(String title,String callBoard){
+        boardService.insertBoard(title,callBoard);
+
+    }
 }

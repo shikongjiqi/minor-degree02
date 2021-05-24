@@ -105,6 +105,7 @@ public class UserServiceImpl implements IUserService {
 
     //    管理员修改用户信息
     public RespData adminUpdateUser(User user) {
+
         userMapper.update(user,null);
         return new RespData(RespCode.SUCCESS);
     }
@@ -138,6 +139,7 @@ public class UserServiceImpl implements IUserService {
         result.setAge(user.getAge());
         result.setPhones(user.getPhones());
         result.setEmail(user.getEmail());
+        result.setCardId(user.getCardId());
         result.setIdentity(user.getIdentity());
         return result;
     }

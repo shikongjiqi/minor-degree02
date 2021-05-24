@@ -23,6 +23,7 @@ public class UserController {
 
     //退出账号
     @GetMapping("/logout")
+//    验证token
     @RequiresAuthentication
     public RespData logout() {
         SecurityUtils.getSubject().logout();
@@ -37,8 +38,8 @@ public class UserController {
      */
     @GetMapping("/delUser")
     @RequiresAuthentication
-    public RespData delUser(HttpSession session) {
-        int id = (Integer) session.getAttribute("userId");
+    public RespData delUser(int id) {
+//        int id = (Integer) session.getAttribute("userId");
         RespData respData = userService.delUser(id);
         return respData;
     }
